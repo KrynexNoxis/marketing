@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horizonte Digital — Marketing y Crecimiento Empresarial</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-300 antialiased selection:bg-emerald-500 selection:text-white">
+
+    <!-- Header / Navbar -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200/60 dark:border-slate-800/60 transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="javascript:void(0)" onclick="scrollToSection('inicio')" class="flex items-center gap-3 group">
+                <img src="https://im.ge/i/QQU5PE9" alt="Horizonte Digital Logo" class="h-11 w-auto object-contain rounded-lg shadow-sm border border-slate-200 dark:border-slate-700 bg-white p-0.5">
+                <div class="flex flex-col">
+                    <span class="font-bold text-lg tracking-tight text-slate-900 dark:text-white group-hover:text-emerald-600 transition-colors">Horizonte Digital</span>
+                    <span class="text-xs text-slate-500 dark:text-slate-400 font-medium tracking-wide">Ideas que impulsan tu crecimiento</span>
+                </div>
+            </a>
+
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600 dark:text-slate-300">
+                <a href="javascript:void(0)" onclick="scrollToSection('servicios')" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Servicios</a>
+                <a href="javascript:void(0)" onclick="scrollToSection('cotizador')" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Cotizador & Calculadora</a>
+                <a href="javascript:void(0)" onclick="scrollToSection('nosotros')" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Nosotros & Equipo</a>
+                <a href="javascript:void(0)" onclick="scrollToSection('finanzas')" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Finanzas</a>
+                <a href="javascript:void(0)" onclick="scrollToSection('contacto')" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Contacto</a>
+            </nav>
+
+            <!-- Actions: Theme Toggle & CTA -->
+            <div class="flex items-center gap-3">
+                <button type="button" onclick="toggleDarkMode()" class="p-2.5 rounded-full text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white bg-slate-100 dark:bg-slate-800 transition-colors" aria-label="Cambiar Tema">
+                    <i id="theme-icon" class="fa-solid fa-moon text-sm"></i>
+                </button>
+                <button type="button" onclick="scrollToSection('cotizador')" class="hidden sm:inline-flex items-center justify-center px-4 py-2.5 text-sm font-semibold rounded-full bg-slate-900 text-white dark:bg-white dark:text-slate-900 hover:bg-emerald-600 dark:hover:bg-emerald-400 dark:hover:text-slate-950 transition-all shadow-sm">
+                    Cotizar Proyecto
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="pt-20">
+
+        <!-- Hero Section -->
+        <section id="inicio" class="relative py-24 md:py-32 overflow-hidden border-b border-slate-100 dark:border-slate-900">
+            <div class="absolute inset-0 bg-[radial-gradient(#10b98115_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none"></div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="max-w-3xl mx-auto text-center">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300 mb-6 border border-emerald-200 dark:border-emerald-800">
+                        <i class="fa-solid fa-bolt text-emerald-500"></i> Agencia de Marketing Digital & Crecimiento Pyme
+                    </div>
+                    <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white mb-6 leading-tight">
+                        Ideas que impulsan tu <span class="text-emerald-600 dark:text-emerald-400">crecimiento digital</span>
+                    </h1>
+                    <p class="text-lg sm:text-xl text-slate-600 dark:text-slate-300 mb-10 font-normal leading-relaxed">
+                        Potenciamos pequeñas y medianas empresas mediante estrategias creativas, publicidad de alto rendimiento, gestión profesional de redes sociales y desarrollo web optimizado para convertir.
+                    </p>
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                        <button type="button" onclick="scrollToSection('servicios')" class="w-full sm:w-auto px-8 py-3.5 rounded-full font-semibold bg-emerald-600 text-white hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-600/20">
+                            Explorar Servicios <i class="fa-solid fa-arrow-right ml-2 text-xs"></i>
+                        </button>
+                        <button type="button" onclick="scrollToSection('cotizador')" class="w-full sm:w-auto px-8 py-3.5 rounded-full font-semibold bg-slate-100 text-slate-900 dark:bg-slate-800 dark:text-white hover:bg-slate-200 dark:hover:bg-slate-700 transition-all border border-slate-200 dark:border-slate-700">
+                            Calculadora Interactiva
+                        </button>
+                    </div>
+
+                    <!-- Key metrics banner -->
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-6 mt-16 pt-12 border-t border-slate-200/60 dark:border-slate-800/60 text-left">
+                        <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200/50 dark:border-slate-800">
+                            <p class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">+150%</p>
+                            <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">Incremento promedio en tráfico y ventas</p>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200/50 dark:border-slate-800">
+                            <p class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">80%</p>
+                            <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">Tasa anual de retención de clientes</p>
+                        </div>
+                        <div class="col-span-2 md:col-span-1 p-4 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200/50 dark:border-slate-800">
+                            <p class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">100%</p>
+                            <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">Enfoque en resultados y ROI medible</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="servicios" class="py-24 bg-slate-50/50 dark:bg-slate-900/30 border-b border-slate-100 dark:border-slate-900">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-16">
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 mb-2 block">Soluciones Integrales</span>
+                        <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 dark:text-white">Catálogo de Servicios y Productos</h2>
+                    </div>
+                    <!-- Filters -->
+                    <div class="flex flex-wrap gap-2 mt-6 md:mt-0">
+                        <button type="button" onclick="filterServices('all')" class="service-filter-btn px-4 py-2 rounded-full text-xs font-semibold bg-slate-900 text-white dark:bg-white dark:text-slate-900 transition-all">Todos</button>
+                        <button type="button" onclick="filterServices('recurrente')" class="service-filter-btn px-4 py-2 rounded-full text-xs font-semibold bg-white text-slate-600 dark:bg-slate-800 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition-all">Recurrentes</button>
+                        <button type="button" onclick="filterServices('proyecto')" class="service-filter-btn px-4 py-2 rounded-full text-xs font-semibold bg-white text-slate-600 dark:bg-slate-800 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition-all">Proyectos Únicos</button>
+                    </div>
+                </div>
+
+                <!-- Services Grid -->
+                <div id="services-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Service 1 -->
+                    <div class="service-card bg-white dark:bg-slate-900 rounded-3xl p-8 border border-slate-200/80 dark:border-slate-800 shadow-sm hover:shadow-md transition-all flex flex-col justify-between" data-category="recurrente">
+                        <div>
+                            <div class="flex items-center justify-between mb-6">
+                                <span class="p-3 rounded-2xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 text-lg">
+                                    <i class="fa-solid fa-share-nodes"></i>
+                                </span>
+                                <span class="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300">Mensual</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Gestión de Redes Sociales</h3>
+                            <p class="text-sm text-slate-600 dark:text-slate-400 mb-6">Creación y programación de contenido (diseño, copies, Reels/TikToks) y gestión de comunidad.</p>
+                        </div>
+                        <div class="pt-6 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+                            <div>
+                                <span class="text-xs text-slate-400 block">Inversión</span>
+                                <span class="text-2xl font-bold text-slate-900 dark:text-white">$350<span class="text-xs font-normal text-slate-500">/mes</span></span>
+                            </div>
+                            <button type="button" onclick="openServiceModal('Gestión de Redes Sociales', '$350/mes', 'Incluye diseño de parrilla de contenidos, redacción de copys profesionales, edición de videos cortos (Reels/TikTok) y gestión activa de comunidad.')" class="px-4 py-2 rounded-full text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white hover:bg-emerald-600 hover:text-white transition-all">Ver Detalle</button>
+                        </div>
+                    </div>
+
+                    <!-- Service 2 -->
+                    <div class="service-card bg-white dark:bg-slate-900 rounded-3xl p-8 border border-slate-200/80 dark:border-slate-800 shadow-sm hover:shadow-md transition-all flex flex-col justify-between" data-category="recurrente">
+                        <div>
+                            <div class="flex items-center justify-between mb-6">
+                                <span class="p-3 rounded-2xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 text-lg">
+                                    <i class="fa-solid fa-bullhorn"></i>
+                                </span>
+                                <span class="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300">Mensual</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Publicidad Digital (Ads)</h3>
+                            <p class="text-sm text-slate-600 dark:text-slate-400 mb-6">Gestión y optimización de campañas en Meta Ads (Instagram/Facebook), Google Ads y TikTok Ads con enfoque en ROI.</p>
+                        </div>
+                        <div class="pt-6 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+                            <div>
+                                <span class="text-xs text-slate-400 block">Inversión</span>
+                                <span class="text-2xl font-bold text-slate-900 dark:text-white">$450<span class="text-xs font-normal text-slate-500">/mes</span></span>
+                            </div>
+                            <button type="button" onclick="openServiceModal('Publicidad Digital (Ads)', '$450/mes', 'Estrategia de pauta publicitaria en Meta, Google y TikTok. Incluye segmentación avanzada, diseño de creativos publicitarios y reporte mensual de conversiones.')" class="px-4 py-2 rounded-full text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white hover:bg-emerald-600 hover:text-white transition-all">Ver Detalle</button>
+                        </div>
+                    </div>
+
+                    <!-- Service 3 -->
+                    <div class="service-card bg-white dark:bg-slate-900 rounded-3xl p-8 border border-slate-200/80 dark:border-slate-800 shadow-sm hover:shadow-md transition-all flex flex-col justify-between" data-category="proyecto">
+                        <div>
+                            <div class="flex items-center justify-between mb-6">
+                                <span class="p-3 rounded-2xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 text-lg">
+                                    <i class="fa-solid fa-laptop-code"></i>
+                                </span>
+                                <span class="px-3 py-1 rounded-full text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">Pago único</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Diseño y Desarrollo Web</h3>
+                            <p class="text-sm text-slate-600 dark:text-slate-400 mb-6">Creación de sitios web corporativos, landing pages de alta conversión o tiendas en línea (E-commerce).</p>
+                        </div>
+                        <div class="pt-6 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+                            <div>
+                                <span class="text-xs text-slate-400 block">Inversión</span>
+                                <span class="text-2xl font-bold text-slate-900 dark:text-white">$800</span>
+                            </div>
+                            <button type="button" onclick="openServiceModal('Diseño y Desarrollo Web', '$800 (Único pago)', 'Sitio web profesional adaptable a dispositivos móviles, optimizado para SEO técnico, velocidad de carga superior y pasarela de pago integrada.')" class="px-4 py-2 rounded-full text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white hover:bg-emerald-600 hover:text-white transition-all">Ver Detalle</button>
+                        </div>
+                    </div>
+
+                    <!-- Service 4 -->
+                    <div class="service-card bg-white dark:bg-slate-900 rounded-3xl p-8 border border-slate-200/80 dark:border-slate-800 shadow-sm hover:shadow-md transition-all flex flex-col justify-between" data-category="proyecto">
+                        <div>
+                            <div class="flex items-center justify-between mb-6">
+                                <span class="p-3 rounded-2xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 text-lg">
+                                    <i class="fa-solid fa-camera-retro"></i>
+                                </span>
+                                <span class="px-3 py-1 rounded-full text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">Pago único</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Producción Audiovisual</h3>
+                            <p class="text-sm text-slate-600 dark:text-slate-400 mb-6">Sesiones de fotografía de producto/corporativa y producción y edición de videos promocionales.</p>
+                        </div>
+                        <div class="pt-6 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+                            <div>
+                                <span class="text-xs text-slate-400 block">Inversión</span>
+                                <span class="text-2xl font-bold text-slate-900 dark:text-white">$600</span>
+                            </div>
+                            <button type="button" onclick="openServiceModal('Producción Audiovisual', '$600 (Único pago)', 'Sesión fotográfica profesional en alta resolución y edición de videos dinámicos para redes sociales y anuncios.')" class="px-4 py-2 rounded-full text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white hover:bg-emerald-600 hover:text-white transition-all">Ver Detalle</button>
+                        </div>
+                    </div>
+
+                    <!-- Service 5 -->
+                    <div class="service-card bg-white dark:bg-slate-900 rounded-3xl p-8 border border-slate-200/80 dark:border-slate-800 shadow-sm hover:shadow-md transition-all flex flex-col justify-between" data-category="recurrente">
+                        <div>
+                            <div class="flex items-center justify-between mb-6">
+                                <span class="p-3 rounded-2xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 text-lg">
+                                    <i class="fa-solid fa-magnifying-glass-chart"></i>
+                                </span>
+                                <span class="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300">Mensual</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Plan de Marketing Integral</h3>
+                            <p class="text-sm text-slate-600 dark:text-slate-400 mb-6">Estrategia completa omnicanal (Social Media, SEO, Ads y Email Marketing) para máxima visibilidad.</p>
+                        </div>
+                        <div class="pt-6 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+                            <div>
+                                <span class="text-xs text-slate-400 block">Inversión</span>
+                                <span class="text-2xl font-bold text-slate-900 dark:text-white">$1,200<span class="text-xs font-normal text-slate-500">/mes</span></span>
+                            </div>
+                            <button type="button" onclick="openServiceModal('Plan de Marketing Integral', '$1,200/mes', 'Solución corporativa total: Gestión completa de redes, pauta publicitaria multicanal, SEO mensual y automatización de correo.')" class="px-4 py-2 rounded-full text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white hover:bg-emerald-600 hover:text-white transition-all">Ver Detalle</button>
+                        </div>
+                    </div>
+
+                    <!-- Service 6 -->
+                    <div class="service-card bg-white dark:bg-slate-900 rounded-3xl p-8 border border-slate-200/80 dark:border-slate-800 shadow-sm hover:shadow-md transition-all flex flex-col justify-between" data-category="proyecto">
+                        <div>
+                            <div class="flex items-center justify-between mb-6">
+                                <span class="p-3 rounded-2xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 text-lg">
+                                    <i class="fa-solid fa-book-open"></i>
+                                </span>
+                                <span class="px-3 py-1 rounded-full text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">Infoproducto</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Pack de Plantillas & Guías</h3>
+                            <p class="text-sm text-slate-600 dark:text-slate-400 mb-6">Packs editables en Canva para redes sociales y guías paso a paso de ventas digitales para PyMEs.</p>
+                        </div>
+                        <div class="pt-6 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+                            <div>
+                                <span class="text-xs text-slate-400 block">Inversión</span>
+                                <span class="text-2xl font-bold text-slate-900 dark:text-white">$49</span>
+                            </div>
+                            <button type="button" onclick="openServiceModal('Pack de Plantillas & Guías', '$49', 'Acceso inmediato a más de 100 plantillas editables en Canva y e-books especializados sobre marketing y ventas por WhatsApp.')" class="px-4 py-2 rounded-full text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white hover:bg-emerald-600 hover:text-white transition-all">Ver Detalle</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Calculators & Quote Builder Section -->
+        <section id="cotizador" class="py-24 border-b border-slate-100 dark:border-slate-900">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-2xl mx-auto mb-16">
+                    <span class="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 mb-2 block">Herramientas Interactivas</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 dark:text-white mb-4">Calculadora & Creador de Paquetes</h2>
+                    <p class="text-slate-600 dark:text-slate-300 text-sm">Selecciona los servicios que necesitas para tu negocio y obtén una estimación instantánea o calcula tu precio basado en márgenes.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Custom Package Builder -->
+                    <div class="bg-white dark:bg-slate-900 rounded-3xl p-8 border border-slate-200/80 dark:border-slate-800 shadow-sm flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-3">
+                                <i class="fa-solid fa-cart-shopping text-emerald-600"></i> Armador de Paquete a la Medida
+                            </h3>
+                            <div class="space-y-4 mb-8">
+                                <label class="flex items-center justify-between p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/60 cursor-pointer hover:border-emerald-500 transition-all">
+                                    <div class="flex items-center gap-3">
+                                        <input type="checkbox" value="350" data-name="Gestión de Redes Sociales" onchange="calculateQuote()" class="w-4 h-4 text-emerald-600 rounded focus:ring-emerald-500">
+                                        <span class="text-sm font-medium text-slate-900 dark:text-white">Gestión de Redes Sociales</span>
+                                    </div>
+                                    <span class="text-sm font-bold text-slate-900 dark:text-white">$350/mes</span>
+                                </label>
+                                <label class="flex items-center justify-between p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/60 cursor-pointer hover:border-emerald-500 transition-all">
+                                    <div class="flex items-center gap-3">
+                                        <input type="checkbox" value="450" data-name="Publicidad Digital (Ads)" onchange="calculateQuote()" class="w-4 h-4 text-emerald-600 rounded focus:ring-emerald-500">
+                                        <span class="text-sm font-medium text-slate-900 dark:text-white">Publicidad Digital (Ads)</span>
+                                    </div>
+                                    <span class="text-sm font-bold text-slate-900 dark:text-white">$450/mes</span>
+                                </label>
+                                <label class="flex items-center justify-between p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/60 cursor-pointer hover:border-emerald-500 transition-all">
+                                    <div class="flex items-center gap-3">
+                                        <input type="checkbox" value="800" data-name="Diseño y Desarrollo Web" onchange="calculateQuote()" class="w-4 h-4 text-emerald-600 rounded focus:ring-emerald-500">
+                                        <span class="text-sm font-medium text-slate-900 dark:text-white">Diseño y Desarrollo Web</span>
+                                    </div>
+                                    <span class="text-sm font-bold text-slate-900 dark:text-white">$800</span>
+                                </label>
+                                <label class="flex items-center justify-between p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/60 cursor-pointer hover:border-emerald-500 transition-all">
+                                    <div class="flex items-center gap-3">
+                                        <input type="checkbox" value="600" data-name="Producción Audiovisual" onchange="calculateQuote()" class="w-4 h-4 text-emerald-600 rounded focus:ring-emerald-500">
+                                        <span class="text-sm font-medium text-slate-900 dark:text-white">Producción Audiovisual</span>
+                                    </div>
+                                    <span class="text-sm font-bold text-slate-900 dark:text-white">$600</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="p-6 rounded-2xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/60 flex items-center justify-between">
+                            <div>
+                                <span class="text-xs text-emerald-700 dark:text-emerald-300 font-semibold block uppercase tracking-wider">Total Estimado</span>
+                                <span id="quote-total" class="text-3xl font-extrabold text-slate-900 dark:text-white">$0</span>
+                            </div>
+                            <button type="button" onclick="sendWhatsAppQuote()" class="px-6 py-3 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm transition-all shadow-md shadow-emerald-600/20 flex items-center gap-2">
+                                <i class="fa-brands fa-whatsapp text-lg"></i> Enviar por WhatsApp
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- PV Margin Formula Calculator -->
+                    <div class="bg-white dark:bg-slate-900 rounded-3xl p-8 border border-slate-200/80 dark:border-slate-800 shadow-sm flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-3">
+                                <i class="fa-solid fa-calculator text-emerald-600"></i> Calculadora de Precio (PV = CV / (1 - %M))
+                            </h3>
+                            <form onsubmit="event.preventDefault();" class="space-y-4 mb-6">
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">Costo Variable Unitario ($)</label>
+                                    <input type="number" id="calc-cv" value="460" oninput="calculatePV()" class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">Margen Deseado (%)</label>
+                                    <input type="number" id="calc-margin" value="61.7" step="0.1" oninput="calculatePV()" class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="p-6 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 grid grid-cols-2 gap-4">
+                            <div>
+                                <span class="text-xs text-slate-400 block">Precio de Venta (PV)</span>
+                                <span id="res-pv" class="text-2xl font-bold text-emerald-600 dark:text-emerald-400">$1,200.00</span>
+                            </div>
+                            <div>
+                                <span class="text-xs text-slate-400 block">Margen Unitario (MC)</span>
+                                <span id="res-mc" class="text-2xl font-bold text-slate-900 dark:text-white">$740.00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About & Team Organigram Section -->
+        <section id="nosotros" class="py-24 bg-slate-50/50 dark:bg-slate-900/30 border-b border-slate-100 dark:border-slate-900">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-2xl mx-auto mb-16">
+                    <span class="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 mb-2 block">Estructura Organizacional</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 dark:text-white mb-4">Nuestro Equipo Directivo y Operativo</h2>
+                    <p class="text-slate-600 dark:text-slate-300 text-sm">Profesionales comprometidos con la excelencia, la creatividad y el éxito digital de nuestros clientes.</p>
+                </div>
+
+                <!-- Organigram Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Member 1 -->
+                    <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-200/80 dark:border-slate-800 text-center shadow-sm">
+                        <div class="w-16 h-16 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-xl font-bold mx-auto mb-4">RC</div>
+                        <h3 class="font-bold text-slate-900 dark:text-white">Rebeca Michelle Calderón</h3>
+                        <p class="text-xs font-semibold text-emerald-600 dark:text-emerald-400 mt-1">Director General / CEO</p>
+                    </div>
+                    <!-- Member 2 -->
+                    <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-200/80 dark:border-slate-800 text-center shadow-sm">
+                        <div class="w-16 h-16 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-xl font-bold mx-auto mb-4">IF</div>
+                        <h3 class="font-bold text-slate-900 dark:text-white">Iliana Alicia Fuentes</h3>
+                        <p class="text-xs font-semibold text-emerald-600 dark:text-emerald-400 mt-1">Director de Marketing (CMO)</p>
+                    </div>
+                    <!-- Member 3 -->
+                    <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-200/80 dark:border-slate-800 text-center shadow-sm">
+                        <div class="w-16 h-16 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-xl font-bold mx-auto mb-4">MP</div>
+                        <h3 class="font-bold text-slate-900 dark:text-white">Manuel Pérez</h3>
+                        <p class="text-xs font-semibold text-emerald-600 dark:text-emerald-400 mt-1">Líder de Cuentas / Estrategia</p>
+                    </div>
+                    <!-- Member 4 -->
+                    <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-200/80 dark:border-slate-800 text-center shadow-sm">
+                        <div class="w-16 h-16 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-xl font-bold mx-auto mb-4">ES</div>
+                        <h3 class="font-bold text-slate-900 dark:text-white">Eliseo Sánchez</h3>
+                        <p class="text-xs font-semibold text-emerald-600 dark:text-emerald-400 mt-1">Ejecutivo de Ventas B2B</p>
+                    </div>
+                    <!-- Member 5 -->
+                    <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-200/80 dark:border-slate-800 text-center shadow-sm">
+                        <div class="w-16 h-16 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-xl font-bold mx-auto mb-4">JE</div>
+                        <h3 class="font-bold text-slate-900 dark:text-white">Johana Escobar</h3>
+                        <p class="text-xs font-semibold text-emerald-600 dark:text-emerald-400 mt-1">Administración y Finanzas</p>
+                    </div>
+                    <!-- Member 6 -->
+                    <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-200/80 dark:border-slate-800 text-center shadow-sm">
+                        <div class="w-16 h-16 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-xl font-bold mx-auto mb-4">JD</div>
+                        <h3 class="font-bold text-slate-900 dark:text-white">Jorge Del Cid López</h3>
+                        <p class="text-xs font-semibold text-emerald-600 dark:text-emerald-400 mt-1">Especialista SEO</p>
+                    </div>
+                    <!-- Member 7 -->
+                    <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-200/80 dark:border-slate-800 text-center shadow-sm">
+                        <div class="w-16 h-16 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-xl font-bold mx-auto mb-4">EY</div>
+                        <h3 class="font-bold text-slate-900 dark:text-white">Eduardo Yáñez</h3>
+                        <p class="text-xs font-semibold text-emerald-600 dark:text-emerald-400 mt-1">Especialista Media Buyer (Ads)</p>
+                    </div>
+                    <!-- Member 8 -->
+                    <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-200/80 dark:border-slate-800 text-center shadow-sm">
+                        <div class="w-16 h-16 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-xl font-bold mx-auto mb-4">JR</div>
+                        <h3 class="font-bold text-slate-900 dark:text-white">Jonathan Ramírez</h3>
+                        <p class="text-xs font-semibold text-emerald-600 dark:text-emerald-400 mt-1">Diseñador Gráfico / Video</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Financial Section & Chart.js -->
+        <section id="finanzas" class="py-24 border-b border-slate-100 dark:border-slate-900">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 mb-2 block">Solidez Financiera</span>
+                        <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 dark:text-white mb-6">Balance General Proyectado ($54,000 USD)</h2>
+                        <p class="text-slate-600 dark:text-slate-300 text-sm mb-6 leading-relaxed">
+                            Nuestra estructura financiera está diseñada para garantizar estabilidad operativa, inversión en tecnología de punta y un crecimiento sostenido respaldado por un capital social sólido.
+                        </p>
+                        <ul class="space-y-4 text-sm text-slate-600 dark:text-slate-300">
+                            <li class="flex items-center gap-3">
+                                <i class="fa-solid fa-circle-check text-emerald-600"></i> Total Activos: $37,000 Corrientes + $17,000 No Corrientes
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i class="fa-solid fa-circle-check text-emerald-600"></i> Total Pasivos: $16,000 (Proveedores, Impuestos y Préstamo)
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i class="fa-solid fa-circle-check text-emerald-600"></i> Patrimonio Neto: $38,000 (Capital Social + Utilidades)
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="bg-white dark:bg-slate-900 rounded-3xl p-8 border border-slate-200/80 dark:border-slate-800 shadow-sm flex items-center justify-center">
+                        <div class="w-full max-w-sm h-80">
+                            <canvas id="balanceChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contacto" class="py-24 bg-slate-50/50 dark:bg-slate-900/30">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="max-w-2xl mx-auto text-center mb-16">
+                    <span class="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 mb-2 block">Ponte en Contacto</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 dark:text-white mb-4">¿Listo para escalar tu negocio?</h2>
+                    <p class="text-slate-600 dark:text-slate-300 text-sm">Escríbenos hoy y recibe una auditoría diagnóstica inicial sin costo para tu empresa.</p>
+                </div>
+
+                <div class="max-w-xl mx-auto bg-white dark:bg-slate-900 rounded-3xl p-8 border border-slate-200/80 dark:border-slate-800 shadow-sm">
+                    <form onsubmit="handleContactSubmit(event)" class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">Nombre Completo</label>
+                            <input type="text" required class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500" placeholder="Ej. Carlos Mendoza">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">Correo Electrónico</label>
+                            <input type="email" required class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500" placeholder="carlos@empresa.com">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">Mensaje o Requerimiento</label>
+                            <textarea rows="4" required class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500" placeholder="Cuéntanos sobre tu negocio..."></textarea>
+                        </div>
+                        <button type="submit" class="w-full py-3.5 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm transition-all shadow-md shadow-emerald-600/20">
+                            Enviar Mensaje
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-slate-950 border-t border-slate-200/60 dark:border-slate-800/60 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center gap-3">
+                <img src="https://im.ge/i/QQU5PE9" alt="Horizonte Digital Logo" class="h-9 w-auto object-contain rounded-lg border border-slate-200 dark:border-slate-700 bg-white p-0.5">
+                <span class="font-bold text-slate-900 dark:text-white">Horizonte Digital</span>
+            </div>
+            <p class="text-xs text-slate-500 dark:text-slate-400 text-center">
+                © 2026 Horizonte Digital. Todos los derechos reservados. Proyecto: Soy Emprendedor en mi Municipio.
+            </p>
+            <div class="flex items-center gap-4 text-slate-400">
+                <a href="javascript:void(0)" class="hover:text-emerald-600 transition-colors"><i class="fa-brands fa-linkedin text-lg"></i></a>
+                <a href="javascript:void(0)" class="hover:text-emerald-600 transition-colors"><i class="fa-brands fa-instagram text-lg"></i></a>
+                <a href="javascript:void(0)" class="hover:text-emerald-600 transition-colors"><i class="fa-brands fa-facebook text-lg"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Service Detail Modal -->
+    <div id="service-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm hidden">
+        <div class="bg-white dark:bg-slate-900 rounded-3xl p-8 max-w-lg w-full border border-slate-200 dark:border-slate-800 shadow-2xl relative">
+            <button type="button" onclick="closeServiceModal()" class="absolute top-6 right-6 text-slate-400 hover:text-slate-600 dark:hover:text-white">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+            <h3 id="modal-title" class="text-2xl font-bold text-slate-900 dark:text-white mb-2">Título del Servicio</h3>
+            <p id="modal-price" class="text-emerald-600 dark:text-emerald-400 font-bold text-lg mb-4">$0</p>
+            <p id="modal-desc" class="text-sm text-slate-600 dark:text-slate-300 mb-8 leading-relaxed">Descripción detallada del servicio seleccionado.</p>
+            <button type="button" onclick="closeServiceModal(); scrollToSection('cotizador');" class="w-full py-3 rounded-full bg-slate-900 text-white dark:bg-white dark:text-slate-900 font-semibold text-sm hover:bg-emerald-600 dark:hover:bg-emerald-400 transition-all">
+                Seleccionar en Cotizador
+            </button>
+        </div>
+    </div>
+
+    <!-- Contact Success Modal -->
+    <div id="contact-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm hidden">
+        <div class="bg-white dark:bg-slate-900 rounded-3xl p-8 max-w-sm w-full border border-slate-200 dark:border-slate-800 shadow-2xl text-center">
+            <div class="w-16 h-16 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-600 flex items-center justify-center text-2xl mx-auto mb-4">
+                <i class="fa-solid fa-check"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">¡Mensaje Enviado!</h3>
+            <p class="text-xs text-slate-600 dark:text-slate-400 mb-6">Nos pondremos en contacto contigo a la brevedad posible.</p>
+            <button type="button" onclick="closeContactModal()" class="w-full py-2.5 rounded-full bg-emerald-600 text-white font-semibold text-xs hover:bg-emerald-700 transition-all">Aceptar</button>
+        </div>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Smooth scroll without jumping to top
+        function scrollToSection(id) {
+            const el = document.getElementById(id);
+            if (el) {
+                el.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Dark Mode Toggle
+        function toggleDarkMode() {
+            const html = document.documentElement;
+            html.classList.toggle('dark');
+            const icon = document.getElementById('theme-icon');
+            if (html.classList.contains('dark')) {
+                icon.className = 'fa-solid fa-sun text-sm';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                icon.className = 'fa-solid fa-moon text-sm';
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        // Initialize theme from storage
+        if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            document.getElementById('theme-icon').className = 'fa-solid fa-sun text-sm';
+        }
+
+        // Service Filter
+        function filterServices(category) {
+            const buttons = document.querySelectorAll('.service-filter-btn');
+            buttons.forEach(btn => {
+                btn.className = "service-filter-btn px-4 py-2 rounded-full text-xs font-semibold bg-white text-slate-600 dark:bg-slate-800 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition-all";
+            });
+            event.currentTarget.className = "service-filter-btn px-4 py-2 rounded-full text-xs font-semibold bg-slate-900 text-white dark:bg-white dark:text-slate-900 transition-all";
+
+            const cards = document.querySelectorAll('.service-card');
+            cards.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Modals
+        function openServiceModal(title, price, desc) {
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-price').innerText = price;
+            document.getElementById('modal-desc').innerText = desc;
+            document.getElementById('service-modal').classList.remove('hidden');
+        }
+        function closeServiceModal() {
+            document.getElementById('service-modal').classList.add('hidden');
+        }
+        function closeContactModal() {
+            document.getElementById('contact-modal').classList.add('hidden');
+        }
+        function handleContactSubmit(e) {
+            e.preventDefault();
+            document.getElementById('contact-modal').classList.remove('hidden');
+            e.target.reset();
+        }
+
+        // Quote Calculator
+        function calculateQuote() {
+            const checkboxes = document.querySelectorAll('#cotizador input[type="checkbox"]:checked');
+            let total = 0;
+            checkboxes.forEach(cb => {
+                total += parseFloat(cb.value);
+            });
+            document.getElementById('quote-total').innerText = '$' + total.toLocaleString();
+        }
+
+        function sendWhatsAppQuote() {
+            const checkboxes = document.querySelectorAll('#cotizador input[type="checkbox"]:checked');
+            if (checkboxes.length === 0) {
+                alert('Por favor selecciona al menos un servicio para cotizar.');
+                return;
+            }
+            let text = "Hola Horizonte Digital, me interesa cotizar el siguiente paquete:%0A";
+            let total = 0;
+            checkboxes.forEach(cb => {
+                text += `- ${cb.getAttribute('data-name')} ($${cb.value})%0A`;
+                total += parseFloat(cb.value);
+            });
+            text += `%0ATotal Estimado: $${total.toLocaleString()}`;
+            window.open(`https://wa.me/?text=${text}`, '_blank');
+        }
+
+        // PV = CV / (1 - %M) Calculator
+        function calculatePV() {
+            const cv = parseFloat(document.getElementById('calc-cv').value) || 0;
+            const marginPct = parseFloat(document.getElementById('calc-margin').value) || 0;
+            const mDecimal = marginPct / 100;
+            let pv = 0;
+            if (mDecimal < 1 && mDecimal >= 0) {
+                pv = cv / (1 - mDecimal);
+            }
+            const mc = pv - cv;
+            document.getElementById('res-pv').innerText = '$' + pv.toFixed(2);
+            document.getElementById('res-mc').innerText = '$' + mc.toFixed(2);
+        }
+
+        // Chart.js Balance Sheet
+        window.addEventListener('DOMContentLoaded', () => {
+            const ctx = document.getElementById('balanceChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Activo Corriente', 'Activo No Corriente', 'Pasivo Total', 'Patrimonio Neto'],
+                    datasets: [{
+                        data: [37000, 17000, 16000, 38000],
+                        backgroundColor: ['#10b981', '#34d399', '#f43f5e', '#64748b'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                boxWidth: 12,
+                                font: { size: 11, family: 'Inter' }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
