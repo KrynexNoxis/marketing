@@ -54,7 +54,7 @@
             <!-- Navigation Links -->
             <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600 dark:text-slate-300">
                 <a href="javascript:void(0)" onclick="scrollToSection('servicios')" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Servicios</a>
-                <a href="javascript:void(0)" onclick="scrollToSection('cotizador')" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Cotizador & Calculadora</a>
+                <a href="javascript:void(0)" onclick="scrollToSection('cotizador')" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Cotizador & Metas</a>
                 <a href="javascript:void(0)" onclick="scrollToSection('nosotros')" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Nosotros & Equipo</a>
                 <a href="javascript:void(0)" onclick="scrollToSection('finanzas')" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Finanzas</a>
                 <a href="javascript:void(0)" onclick="scrollToSection('contacto')" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Contacto</a>
@@ -94,7 +94,7 @@
                             Explorar Servicios <i class="fa-solid fa-arrow-right ml-2 text-xs"></i>
                         </button>
                         <button type="button" onclick="scrollToSection('cotizador')" class="w-full sm:w-auto px-8 py-3.5 rounded-full font-semibold bg-slate-100 text-slate-900 dark:bg-slate-800 dark:text-white hover:bg-slate-200 dark:hover:bg-slate-700 transition-all border border-slate-200 dark:border-slate-700">
-                            Calculadora Interactiva
+                            Ver Metas SMART & Cotizador
                         </button>
                     </div>
 
@@ -264,13 +264,13 @@
             </div>
         </section>
 
-        <!-- Calculators & Quote Builder Section -->
+        <!-- Package Builder & SMART Goals Section -->
         <section id="cotizador" class="py-24 border-b border-slate-100 dark:border-slate-900">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center max-w-2xl mx-auto mb-16">
-                    <span class="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 mb-2 block">Herramientas Interactivas</span>
-                    <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 dark:text-white mb-4">Calculadora & Creador de Paquetes</h2>
-                    <p class="text-slate-600 dark:text-slate-300 text-sm">Selecciona los servicios que necesitas para tu negocio y obtén una estimación instantánea o calcula tu precio basado en márgenes.</p>
+                    <span class="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 mb-2 block">Herramientas & Estrategia</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 dark:text-white mb-4">Armador de Paquetes & Metas SMART</h2>
+                    <p class="text-slate-600 dark:text-slate-300 text-sm">Selecciona los servicios para tu empresa y conoce los objetivos estratégicos basados en nuestra metodología de marketing.</p>
                 </div>
 
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -322,37 +322,47 @@
                         </div>
                     </div>
 
-                    <!-- PV Margin Formula Calculator with Explanation -->
+                    <!-- Replaced with SMART Goals & Key KPIs Widget -->
                     <div class="bg-white dark:bg-slate-900 rounded-3xl p-8 border border-slate-200/80 dark:border-slate-800 shadow-sm flex flex-col justify-between">
                         <div>
                             <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2 flex items-center gap-3">
-                                <i class="fa-solid fa-calculator text-emerald-600"></i> Calculadora de Precio (PV = CV / (1 - %M))
+                                <i class="fa-solid fa-bullseye text-emerald-600"></i> Objetivos SMART del Plan de Mercadeo
                             </h3>
                             <p class="text-xs text-slate-500 dark:text-slate-400 mb-6">
-                                <strong class="text-slate-700 dark:text-slate-300">¿Para qué sirve?</strong> Permite fijar un precio científico y rentable asegurando que cubras tus costos operativos y alcances tu margen de ganancia deseado.<br>
-                                <strong class="text-slate-700 dark:text-slate-300">¿Cómo funciona?</strong> Divide el Costo Variable ($CV$) entre el complemento del margen ($(1 - \%M)$). El resultado es el Precio de Venta ($PV$).
+                                Metas específicas, medibles y orientadas a resultados que garantizan el éxito comercial de nuestros clientes.
                             </p>
 
-                            <form onsubmit="event.preventDefault();" class="space-y-4 mb-6">
-                                <div>
-                                    <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">Costo Variable Unitario ($CV$)</label>
-                                    <input type="number" id="calc-cv" value="460" oninput="calculatePV()" class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500">
+                            <div class="space-y-5">
+                                <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/60">
+                                    <div class="flex justify-between items-center mb-1">
+                                        <span class="text-xs font-bold text-slate-900 dark:text-white">1. Visibilidad & Tráfico Web</span>
+                                        <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400">+35% en 6 meses</span>
+                                    </div>
+                                    <p class="text-xs text-slate-600 dark:text-slate-300">Incremento mediante SEO técnico y marketing de contenidos orientados a conversión.</p>
                                 </div>
-                                <div>
-                                    <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">Margen Deseado ($\%M$)</label>
-                                    <input type="number" id="calc-margin" value="61.7" step="0.1" oninput="calculatePV()" class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500">
+
+                                <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/60">
+                                    <div class="flex justify-between items-center mb-1">
+                                        <span class="text-xs font-bold text-slate-900 dark:text-white">2. Captación de Leads Calificados</span>
+                                        <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400">20 reuniones/mes</span>
+                                    </div>
+                                    <p class="text-xs text-slate-600 dark:text-slate-300">Generación de reuniones de ventas mediante campañas PPC en Meta y Google Ads.</p>
                                 </div>
-                            </form>
+
+                                <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/60">
+                                    <div class="flex justify-between items-center mb-1">
+                                        <span class="text-xs font-bold text-slate-900 dark:text-white">3. Fidelización & Retención</span>
+                                        <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400">80% anual</span>
+                                    </div>
+                                    <p class="text-xs text-slate-600 dark:text-slate-300">Tasa de retención de clientes mediante igualas mensuales (retainer) y soporte continuo.</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="p-6 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 grid grid-cols-2 gap-4">
-                            <div>
-                                <span class="text-xs text-slate-400 block">Precio de Venta (PV)</span>
-                                <span id="res-pv" class="text-2xl font-bold text-emerald-600 dark:text-emerald-400">$1,200.00</span>
-                            </div>
-                            <div>
-                                <span class="text-xs text-slate-400 block">Margen Unitario (MC)</span>
-                                <span id="res-mc" class="text-2xl font-bold text-slate-900 dark:text-white">$740.00</span>
-                            </div>
+
+                        <div class="mt-6 p-4 rounded-2xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/60 text-center">
+                            <span class="text-xs font-semibold text-emerald-700 dark:text-emerald-300">
+                                <i class="fa-solid fa-circle-check mr-1"></i> Metodología probada para garantizar ROI e impacto financiero.
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -622,20 +632,6 @@
             });
             text += `%0ATotal Estimado: $${total.toLocaleString()}`;
             window.open(`https://wa.me/?text=${text}`, '_blank');
-        }
-
-        // PV = CV / (1 - %M) Calculator
-        function calculatePV() {
-            const cv = parseFloat(document.getElementById('calc-cv').value) || 0;
-            const marginPct = parseFloat(document.getElementById('calc-margin').value) || 0;
-            const mDecimal = marginPct / 100;
-            let pv = 0;
-            if (mDecimal < 1 && mDecimal >= 0) {
-                pv = cv / (1 - mDecimal);
-            }
-            const mc = pv - cv;
-            document.getElementById('res-pv').innerText = '$' + pv.toFixed(2);
-            document.getElementById('res-mc').innerText = '$' + mc.toFixed(2);
         }
 
         // Chart.js Balance Sheet
