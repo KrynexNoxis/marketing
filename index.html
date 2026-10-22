@@ -3,493 +3,532 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Horizonte Digital — Marketing y Crecimiento Empresarial</title>
-    <!-- Tailwind CSS CDN -->
+    <title>Horizonte Digital | Transformación y Posicionamiento Digital</title>
+    
+    <!-- Load Inter font as fallback for SF Pro -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Load Tailwind CSS for baseline utilities -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            50: '#f0fdf4',
-                            100: '#dcfce7',
-                            500: '#10b981',
-                            600: '#059669',
-                            700: '#047857',
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
-                    }
-                }
+
+    <style>
+        /* ==========================================================================
+           Apple-Style Design Tokens strictly from DESIGN.md
+           ========================================================================== */
+        :root {
+            --color-gallery-white: #ffffff;
+            --color-studio-mist: #f5f5f7;
+            --color-paper-frost: #fafafc;
+            --color-hairline-silver: #d6d6d6;
+            --color-control-gray: #e6e6e8;
+            --color-ink: #1d1d1f;
+            --color-slate: #707070;
+            --color-steel: #86868b;
+            --color-apple-blue: #0066cc;
+            --color-pricing-blue: #0071e3;
+            --color-launch-orange: #b64400;
+            --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            color: var(--color-ink);
+            background-color: var(--color-gallery-white);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Typography */
+        .text-hero-display {
+            font-size: 80px;
+            font-weight: 600;
+            line-height: 1.05;
+            letter-spacing: -1.2px;
+        }
+        
+        .text-feature-heading {
+            font-size: 40px;
+            font-weight: 600;
+            line-height: 1;
+            letter-spacing: 0px;
+        }
+
+        .text-feature-statement {
+            font-size: 24px;
+            font-weight: 600;
+            line-height: 1.14;
+        }
+
+        .text-product-kicker {
+            font-size: 21px;
+            font-weight: 600;
+            line-height: 1;
+            letter-spacing: 0.231px;
+        }
+
+        .text-product-nav-title {
+            font-size: 19px;
+            font-weight: 600;
+            line-height: 1.21;
+            letter-spacing: 0.228px;
+        }
+
+        .text-body {
+            font-size: 17px;
+            font-weight: 400;
+            line-height: 1.47;
+            letter-spacing: -0.374px;
+        }
+
+        .text-body-small {
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.29;
+            letter-spacing: -0.224px;
+        }
+
+        .text-compact-control {
+            font-size: 12px;
+            font-weight: 400;
+            line-height: 1.33;
+            letter-spacing: -0.12px;
+        }
+
+        .text-global-nav {
+            font-size: 12px;
+            font-weight: 400;
+            line-height: 1;
+            letter-spacing: -0.12px;
+            color: rgba(0, 0, 0, 0.8);
+        }
+
+        /* Shapes & Layout */
+        .radius-cards { border-radius: 28px; }
+        .radius-pills { border-radius: 9999px; }
+        
+        .section-gap { 
+            padding-top: 90px; 
+            padding-bottom: 90px; 
+        }
+        
+        .auto-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        
+        .auto-grid-small {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        /* Surfaces & Controls */
+        .flat-card {
+            background-color: var(--color-gallery-white);
+            box-shadow: none !important;
+            border: none;
+            overflow: hidden;
+        }
+
+        .outline-pill {
+            border: 1px solid var(--color-steel);
+            color: var(--color-ink);
+            background-color: transparent;
+        }
+
+        .pricing-pill {
+            background-color: var(--color-pricing-blue);
+            color: var(--color-gallery-white);
+            transition: transform 0.15s ease, background-color 0.2s ease;
+        }
+
+        .img-fluid {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* ==========================================================================
+           Animations (New Requirements)
+           ========================================================================== */
+        
+        /* 1. Modal Slide Up Fade */
+        @keyframes slideUpFade {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-modal-enter {
+            animation: slideUpFade 0.3s ease-out forwards;
+        }
+        
+        /* 2. Cart Counter Pulse */
+        @keyframes pulsePop {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); }
+        }
+        .animate-pop {
+            animation: pulsePop 0.3s ease-out;
+        }
+
+        /* 3. Card Hover Scale */
+        .hover-scale-card {
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        .hover-scale-card:hover {
+            transform: scale(1.02);
+            /* Strictly NO shadows as per design spec */
+        }
+
+        /* Modal backdrop base */
+        .modal-backdrop {
+            background-color: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            transition: opacity 0.3s ease;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .text-hero-display {
+                font-size: 44px;
+                line-height: 1.1;
+                letter-spacing: -0.5px;
+            }
+            .text-feature-heading {
+                font-size: 32px;
+            }
+            .text-feature-statement {
+                font-size: 20px;
+            }
+            .section-gap { 
+                padding-top: 48px; 
+                padding-bottom: 48px; 
+            }
+            .flex-responsive-editorial {
+                flex-direction: column !important;
+                gap: 40px !important;
+            }
+            .flex-responsive-editorial-reverse {
+                flex-direction: column-reverse !important;
+                gap: 40px !important;
             }
         }
-    </script>
-    <!-- FontAwesome CDN -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts: Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Chart.js CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        body { font-family: 'Inter', sans-serif; }
     </style>
 </head>
-<body class="bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-300 antialiased selection:bg-emerald-500 selection:text-white">
+<body class="bg-white">
 
-    <!-- Header / Navbar -->
-    <header class="fixed top-0 left-0 right-0 z-50 bg-white/85 dark:bg-slate-900/85 backdrop-blur-md border-b border-slate-200/60 dark:border-slate-800/65 transition-colors">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <!-- Brand Logo -->
-            <a href="javascript:void(0)" onclick="scrollToSection('inicio')" class="flex items-center gap-3 group">
-                <img src="https://i.im.ge/QQU5PE9/778633d3-bac0-432c-ae7a-07d263ff2446.jpg" alt="Horizonte Digital Logo" class="h-10 w-auto object-contain rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 bg-white p-0.5 group-hover:scale-105 transition-transform">
-                <div class="flex flex-col">
-                    <span class="font-bold text-lg tracking-tight text-slate-900 dark:text-white group-hover:text-emerald-600 transition-colors">Horizonte Digital</span>
-                    <span class="text-xs text-slate-500 dark:text-slate-400 font-medium tracking-wide">Ideas que impulsan tu crecimiento</span>
-                </div>
-            </a>
-
-            <!-- Navigation Links -->
-            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600 dark:text-slate-300">
-                <a href="javascript:void(0)" onclick="scrollToSection('servicios')" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Servicios</a>
-                <a href="javascript:void(0)" onclick="scrollToSection('cotizador')" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Cotizador & Metas</a>
-                <a href="javascript:void(0)" onclick="scrollToSection('nosotros')" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Nosotros & Equipo</a>
-                <a href="javascript:void(0)" onclick="scrollToSection('finanzas')" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Finanzas</a>
-                <a href="javascript:void(0)" onclick="scrollToSection('contacto')" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Contacto</a>
-            </nav>
-
-            <!-- Actions: Theme Toggle & CTA -->
-            <div class="flex items-center gap-3">
-                <button type="button" onclick="toggleDarkMode()" class="p-2.5 rounded-full text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white bg-slate-100 dark:bg-slate-800 transition-colors" aria-label="Cambiar Tema">
-                    <i id="theme-icon" class="fa-solid fa-moon text-sm"></i>
-                </button>
-                <button type="button" onclick="scrollToSection('cotizador')" class="hidden sm:inline-flex items-center justify-center px-4 py-2.5 text-sm font-semibold rounded-full bg-slate-900 text-white dark:bg-white dark:text-slate-900 hover:bg-emerald-600 dark:hover:bg-emerald-400 dark:hover:text-slate-950 transition-all shadow-sm">
-                    Cotizar Proyecto
-                </button>
+    <!-- Global Navigation -->
+    <nav class="w-full h-[44px] bg-[#ffffff] border-b border-[#d6d6d6] flex items-center justify-center px-4 fixed top-0 z-50">
+        <div class="max-w-[1000px] w-full flex justify-between items-center">
+            <a href="#" class="text-global-nav font-semibold text-[#1d1d1f]"></a>
+            <div class="flex gap-6 hidden sm:flex">
+                <a href="#servicios" class="text-global-nav hover:text-[#0066cc] transition-colors">Servicios</a>
+                <a href="#filosofia" class="text-global-nav hover:text-[#0066cc] transition-colors">Filosofía</a>
+                <a href="#metodologia" class="text-global-nav hover:text-[#0066cc] transition-colors">Metodología</a>
+                <a href="#equipo" class="text-global-nav hover:text-[#0066cc] transition-colors">Equipo</a>
+                <a href="#planes" class="text-global-nav hover:text-[#0066cc] transition-colors">Planes</a>
             </div>
         </div>
-    </header>
+    </nav>
 
-    <!-- Main Container -->
-    <main class="pt-20">
+    <!-- Product Local Navigation -->
+    <div class="w-full bg-[rgba(255,255,255,0.9)] backdrop-blur-md border-b border-[#d6d6d6] fixed top-[44px] z-40 px-4 py-3">
+        <div class="max-w-[1000px] mx-auto flex justify-between items-center">
+            <h2 class="text-product-nav-title text-[#1d1d1f]">Horizonte Digital</h2>
+            <div class="flex items-center gap-2 sm:gap-4">
+                <a href="#servicios" class="outline-pill radius-pills text-compact-control px-4 py-1.5 hover:bg-[#f5f5f7] transition-colors hidden sm:block">Explorar</a>
+                <button onclick="toggleCartModal(true)" class="outline-pill radius-pills text-compact-control px-4 py-1.5 hover:bg-[#f5f5f7] transition-colors flex items-center gap-2">
+                    <span>Carrito</span>
+                    <span id="cart-counter" class="bg-[#0071e3] text-white rounded-full w-5 h-5 flex items-center justify-center text-[10px]">0</span>
+                </button>
+                <a href="#planes" class="pricing-pill radius-pills text-compact-control px-4 py-1.5 hover:bg-[#0066cc] text-center">Contratar</a>
+            </div>
+        </div>
+    </div>
 
-        <!-- Hero Section -->
-        <section id="inicio" class="relative py-24 md:py-32 overflow-hidden border-b border-slate-100 dark:border-slate-900">
-            <div class="absolute inset-0 bg-[radial-gradient(#10b98115_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none"></div>
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <div class="max-w-3xl mx-auto text-center">
-                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300 mb-6 border border-emerald-200 dark:border-emerald-800">
-                        <i class="fa-solid fa-bolt text-emerald-500"></i> Agencia de Marketing Digital & Crecimiento Pyme
-                    </div>
-                    <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white mb-6 leading-tight">
-                        Ideas que impulsan tu <span class="text-emerald-600 dark:text-emerald-400">crecimiento digital</span>
-                    </h1>
-                    <p class="text-lg sm:text-xl text-slate-600 dark:text-slate-300 mb-10 font-normal leading-relaxed">
-                        Potenciamos pequeñas y medianas empresas mediante estrategias creativas, publicidad de alto rendimiento, gestión profesional de redes sociales y desarrollo web optimizado para convertir.
-                    </p>
-                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-                        <button type="button" onclick="scrollToSection('servicios')" class="w-full sm:w-auto px-8 py-3.5 rounded-full font-semibold bg-emerald-600 text-white hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-600/20">
-                            Explorar Servicios <i class="fa-solid fa-arrow-right ml-2 text-xs"></i>
-                        </button>
-                        <button type="button" onclick="scrollToSection('cotizador')" class="w-full sm:w-auto px-8 py-3.5 rounded-full font-semibold bg-slate-100 text-slate-900 dark:bg-slate-800 dark:text-white hover:bg-slate-200 dark:hover:bg-slate-700 transition-all border border-slate-200 dark:border-slate-700">
-                            Ver Metas SMART & Cotizador
-                        </button>
-                    </div>
-
-                    <!-- Key metrics banner -->
-                    <div class="grid grid-cols-2 md:grid-cols-3 gap-6 mt-16 pt-12 border-t border-slate-200/60 dark:border-slate-800/60 text-left">
-                        <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200/50 dark:border-slate-800">
-                            <p class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">+150%</p>
-                            <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">Incremento promedio en tráfico y ventas</p>
-                        </div>
-                        <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200/50 dark:border-slate-800">
-                            <p class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">80%</p>
-                            <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">Tasa anual de retención de clientes</p>
-                        </div>
-                        <div class="col-span-2 md:col-span-1 p-4 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200/50 dark:border-slate-800">
-                            <p class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">100%</p>
-                            <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">Enfoque en resultados y ROI medible</p>
-                        </div>
-                    </div>
-                </div>
+    <main class="mt-[100px]">
+        
+        <!-- Hero Stage -->
+        <section id="hero" class="w-full section-gap flex flex-col items-center justify-center text-center px-6 bg-[#ffffff]">
+            <h3 class="text-product-kicker text-[#1d1d1f] mb-4">Horizonte Digital</h3>
+            <h1 class="text-hero-display text-[#1d1d1f] max-w-[900px] mx-auto mb-6">Transformación y Posicionamiento Digital.</h1>
+            <p class="text-feature-statement text-[#707070] max-w-[600px] mb-12">Ideas que impulsan tu crecimiento.</p>
+            
+            <div class="mt-4 relative w-full flex justify-center">
+                <img src="https://i.im.ge/QQU5PE9/778633d3-bac0-432c-ae7a-07d263ff2446.jpg" 
+                     alt="Logo Horizonte Digital" 
+                     class="img-fluid w-[280px] sm:w-[350px] md:w-[450px] object-contain radius-cards" />
             </div>
         </section>
 
-        <!-- Services Section -->
-        <section id="servicios" class="py-24 bg-slate-50/50 dark:bg-slate-900/30 border-b border-slate-100 dark:border-slate-900">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex flex-col md:flex-row md:items-end justify-between mb-16">
-                    <div>
-                        <span class="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 mb-2 block">Soluciones Integrales</span>
-                        <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 dark:text-white">Catálogo de Servicios y Productos</h2>
-                    </div>
-                    <!-- Filters -->
-                    <div class="flex flex-wrap gap-2 mt-6 md:mt-0">
-                        <button type="button" onclick="filterServices('all')" class="service-filter-btn px-4 py-2 rounded-full text-xs font-semibold bg-slate-900 text-white dark:bg-white dark:text-slate-900 transition-all">Todos</button>
-                        <button type="button" onclick="filterServices('recurrente')" class="service-filter-btn px-4 py-2 rounded-full text-xs font-semibold bg-white text-slate-600 dark:bg-slate-800 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition-all">Recurrentes</button>
-                        <button type="button" onclick="filterServices('proyecto')" class="service-filter-btn px-4 py-2 rounded-full text-xs font-semibold bg-white text-slate-600 dark:bg-slate-800 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition-all">Proyectos Únicos</button>
-                    </div>
-                </div>
-
-                <!-- Services Grid -->
-                <div id="services-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- Service 1 -->
-                    <div class="service-card bg-white dark:bg-slate-900 rounded-3xl p-8 border border-slate-200/80 dark:border-slate-800 shadow-sm hover:shadow-md transition-all flex flex-col justify-between" data-category="recurrente">
-                        <div>
-                            <div class="flex items-center justify-between mb-6">
-                                <span class="p-3 rounded-2xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 text-lg">
-                                    <i class="fa-solid fa-share-nodes"></i>
-                                </span>
-                                <span class="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300">Mensual</span>
-                            </div>
-                            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Gestión de Redes Sociales</h3>
-                            <p class="text-sm text-slate-600 dark:text-slate-400 mb-6">Creación y programación de contenido (diseño, copies, Reels/TikToks) y gestión de comunidad.</p>
-                        </div>
-                        <div class="pt-6 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
-                            <div>
-                                <span class="text-xs text-slate-400 block">Inversión</span>
-                                <span class="text-2xl font-bold text-slate-900 dark:text-white">$350<span class="text-xs font-normal text-slate-500">/mes</span></span>
-                            </div>
-                            <button type="button" onclick="openServiceModal('Gestión de Redes Sociales', '$350/mes', 'Incluye diseño de parrilla de contenidos, redacción de copys profesionales, edición de videos cortos (Reels/TikTok) y gestión activa de comunidad.')" class="px-4 py-2 rounded-full text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white hover:bg-emerald-600 hover:text-white transition-all">Ver Detalle</button>
-                        </div>
-                    </div>
-
-                    <!-- Service 2 -->
-                    <div class="service-card bg-white dark:bg-slate-900 rounded-3xl p-8 border border-slate-200/80 dark:border-slate-800 shadow-sm hover:shadow-md transition-all flex flex-col justify-between" data-category="recurrente">
-                        <div>
-                            <div class="flex items-center justify-between mb-6">
-                                <span class="p-3 rounded-2xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 text-lg">
-                                    <i class="fa-solid fa-bullhorn"></i>
-                                </span>
-                                <span class="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300">Mensual</span>
-                            </div>
-                            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Publicidad Digital (Ads)</h3>
-                            <p class="text-sm text-slate-600 dark:text-slate-400 mb-6">Gestión y optimización de campañas en Meta Ads (Instagram/Facebook), Google Ads y TikTok Ads con enfoque en ROI.</p>
-                        </div>
-                        <div class="pt-6 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
-                            <div>
-                                <span class="text-xs text-slate-400 block">Inversión</span>
-                                <span class="text-2xl font-bold text-slate-900 dark:text-white">$450<span class="text-xs font-normal text-slate-500">/mes</span></span>
-                            </div>
-                            <button type="button" onclick="openServiceModal('Publicidad Digital (Ads)', '$450/mes', 'Estrategia de pauta publicitaria en Meta, Google y TikTok. Incluye segmentación avanzada, diseño de creativos publicitarios y reporte mensual de conversiones.')" class="px-4 py-2 rounded-full text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white hover:bg-emerald-600 hover:text-white transition-all">Ver Detalle</button>
-                        </div>
-                    </div>
-
-                    <!-- Service 3 -->
-                    <div class="service-card bg-white dark:bg-slate-900 rounded-3xl p-8 border border-slate-200/80 dark:border-slate-800 shadow-sm hover:shadow-md transition-all flex flex-col justify-between" data-category="proyecto">
-                        <div>
-                            <div class="flex items-center justify-between mb-6">
-                                <span class="p-3 rounded-2xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 text-lg">
-                                    <i class="fa-solid fa-laptop-code"></i>
-                                </span>
-                                <span class="px-3 py-1 rounded-full text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">Pago único</span>
-                            </div>
-                            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Diseño y Desarrollo Web</h3>
-                            <p class="text-sm text-slate-600 dark:text-slate-400 mb-6">Creación de sitios web corporativos, landing pages de alta conversión o tiendas en línea (E-commerce).</p>
-                        </div>
-                        <div class="pt-6 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
-                            <div>
-                                <span class="text-xs text-slate-400 block">Inversión</span>
-                                <span class="text-2xl font-bold text-slate-900 dark:text-white">$800</span>
-                            </div>
-                            <button type="button" onclick="openServiceModal('Diseño y Desarrollo Web', '$800 (Único pago)', 'Sitio web profesional adaptable a dispositivos móviles, optimizado para SEO técnico, velocidad de carga superior y pasarela de pago integrada.')" class="px-4 py-2 rounded-full text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white hover:bg-emerald-600 hover:text-white transition-all">Ver Detalle</button>
-                        </div>
-                    </div>
-
-                    <!-- Service 4 -->
-                    <div class="service-card bg-white dark:bg-slate-900 rounded-3xl p-8 border border-slate-200/80 dark:border-slate-800 shadow-sm hover:shadow-md transition-all flex flex-col justify-between" data-category="proyecto">
-                        <div>
-                            <div class="flex items-center justify-between mb-6">
-                                <span class="p-3 rounded-2xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 text-lg">
-                                    <i class="fa-solid fa-camera-retro"></i>
-                                </span>
-                                <span class="px-3 py-1 rounded-full text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">Pago único</span>
-                            </div>
-                            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Producción Audiovisual</h3>
-                            <p class="text-sm text-slate-600 dark:text-slate-400 mb-6">Sesiones de fotografía de producto/corporativa y producción y edición de videos promocionales.</p>
-                        </div>
-                        <div class="pt-6 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
-                            <div>
-                                <span class="text-xs text-slate-400 block">Inversión</span>
-                                <span class="text-2xl font-bold text-slate-900 dark:text-white">$600</span>
-                            </div>
-                            <button type="button" onclick="openServiceModal('Producción Audiovisual', '$600 (Único pago)', 'Sesión fotográfica profesional en alta resolución y edición de videos dinámicos para redes sociales y anuncios.')" class="px-4 py-2 rounded-full text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white hover:bg-emerald-600 hover:text-white transition-all">Ver Detalle</button>
-                        </div>
-                    </div>
-
-                    <!-- Service 5 -->
-                    <div class="service-card bg-white dark:bg-slate-900 rounded-3xl p-8 border border-slate-200/80 dark:border-slate-800 shadow-sm hover:shadow-md transition-all flex flex-col justify-between" data-category="recurrente">
-                        <div>
-                            <div class="flex items-center justify-between mb-6">
-                                <span class="p-3 rounded-2xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 text-lg">
-                                    <i class="fa-solid fa-magnifying-glass-chart"></i>
-                                </span>
-                                <span class="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300">Mensual</span>
-                            </div>
-                            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Plan de Marketing Integral</h3>
-                            <p class="text-sm text-slate-600 dark:text-slate-400 mb-6">Estrategia completa omnicanal (Social Media, SEO, Ads y Email Marketing) para máxima visibilidad.</p>
-                        </div>
-                        <div class="pt-6 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
-                            <div>
-                                <span class="text-xs text-slate-400 block">Inversión</span>
-                                <span class="text-2xl font-bold text-slate-900 dark:text-white">$1,200<span class="text-xs font-normal text-slate-500">/mes</span></span>
-                            </div>
-                            <button type="button" onclick="openServiceModal('Plan de Marketing Integral', '$1,200/mes', 'Solución corporativa total: Gestión completa de redes, pauta publicitaria multicanal, SEO mensual y automatización de correo.')" class="px-4 py-2 rounded-full text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white hover:bg-emerald-600 hover:text-white transition-all">Ver Detalle</button>
-                        </div>
-                    </div>
-
-                    <!-- Service 6 -->
-                    <div class="service-card bg-white dark:bg-slate-900 rounded-3xl p-8 border border-slate-200/80 dark:border-slate-800 shadow-sm hover:shadow-md transition-all flex flex-col justify-between" data-category="proyecto">
-                        <div>
-                            <div class="flex items-center justify-between mb-6">
-                                <span class="p-3 rounded-2xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 text-lg">
-                                    <i class="fa-solid fa-book-open"></i>
-                                </span>
-                                <span class="px-3 py-1 rounded-full text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">Infoproducto</span>
-                            </div>
-                            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Pack de Plantillas & Guías</h3>
-                            <p class="text-sm text-slate-600 dark:text-slate-400 mb-6">Packs editables en Canva para redes sociales y guías paso a paso de ventas digitales para PyMEs.</p>
-                        </div>
-                        <div class="pt-6 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
-                            <div>
-                                <span class="text-xs text-slate-400 block">Inversión</span>
-                                <span class="text-2xl font-bold text-slate-900 dark:text-white">$49</span>
-                            </div>
-                            <button type="button" onclick="openServiceModal('Pack de Plantillas & Guías', '$49', 'Acceso inmediato a más de 100 plantillas editables en Canva y e-books especializados sobre marketing y ventas por WhatsApp.')" class="px-4 py-2 rounded-full text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white hover:bg-emerald-600 hover:text-white transition-all">Ver Detalle</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Package Builder & SMART Goals Section -->
-        <section id="cotizador" class="py-24 border-b border-slate-100 dark:border-slate-900">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center max-w-2xl mx-auto mb-16">
-                    <span class="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 mb-2 block">Herramientas & Estrategia</span>
-                    <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 dark:text-white mb-4">Armador de Paquetes & Metas SMART</h2>
-                    <p class="text-slate-600 dark:text-slate-300 text-sm">Selecciona los servicios para tu empresa y conoce los objetivos estratégicos basados en nuestra metodología de marketing.</p>
-                </div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    <!-- Custom Package Builder -->
-                    <div class="bg-white dark:bg-slate-900 rounded-3xl p-8 border border-slate-200/80 dark:border-slate-800 shadow-sm flex flex-col justify-between">
-                        <div>
-                            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-3">
-                                <i class="fa-solid fa-cart-shopping text-emerald-600"></i> Armador de Paquete a la Medida
-                            </h3>
-                            <div class="space-y-4 mb-8">
-                                <label class="flex items-center justify-between p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/60 cursor-pointer hover:border-emerald-500 transition-all">
-                                    <div class="flex items-center gap-3">
-                                        <input type="checkbox" value="350" data-name="Gestión de Redes Sociales" onchange="calculateQuote()" class="w-4 h-4 text-emerald-600 rounded focus:ring-emerald-500">
-                                        <span class="text-sm font-medium text-slate-900 dark:text-white">Gestión de Redes Sociales</span>
-                                    </div>
-                                    <span class="text-sm font-bold text-slate-900 dark:text-white">$350/mes</span>
-                                </label>
-                                <label class="flex items-center justify-between p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/60 cursor-pointer hover:border-emerald-500 transition-all">
-                                    <div class="flex items-center gap-3">
-                                        <input type="checkbox" value="450" data-name="Publicidad Digital (Ads)" onchange="calculateQuote()" class="w-4 h-4 text-emerald-600 rounded focus:ring-emerald-500">
-                                        <span class="text-sm font-medium text-slate-900 dark:text-white">Publicidad Digital (Ads)</span>
-                                    </div>
-                                    <span class="text-sm font-bold text-slate-900 dark:text-white">$450/mes</span>
-                                </label>
-                                <label class="flex items-center justify-between p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/60 cursor-pointer hover:border-emerald-500 transition-all">
-                                    <div class="flex items-center gap-3">
-                                        <input type="checkbox" value="800" data-name="Diseño y Desarrollo Web" onchange="calculateQuote()" class="w-4 h-4 text-emerald-600 rounded focus:ring-emerald-500">
-                                        <span class="text-sm font-medium text-slate-900 dark:text-white">Diseño y Desarrollo Web</span>
-                                    </div>
-                                    <span class="text-sm font-bold text-slate-900 dark:text-white">$800</span>
-                                </label>
-                                <label class="flex items-center justify-between p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/60 cursor-pointer hover:border-emerald-500 transition-all">
-                                    <div class="flex items-center gap-3">
-                                        <input type="checkbox" value="600" data-name="Producción Audiovisual" onchange="calculateQuote()" class="w-4 h-4 text-emerald-600 rounded focus:ring-emerald-500">
-                                        <span class="text-sm font-medium text-slate-900 dark:text-white">Producción Audiovisual</span>
-                                    </div>
-                                    <span class="text-sm font-bold text-slate-900 dark:text-white">$600</span>
-                                </label>
-                            </div>
-                        </div>
-                        <div class="p-6 rounded-2xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/60 flex items-center justify-between">
-                            <div>
-                                <span class="text-xs text-emerald-700 dark:text-emerald-300 font-semibold block uppercase tracking-wider">Total Estimado</span>
-                                <span id="quote-total" class="text-3xl font-extrabold text-slate-900 dark:text-white">$0</span>
-                            </div>
-                            <button type="button" onclick="sendWhatsAppQuote()" class="px-6 py-3 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm transition-all shadow-md shadow-emerald-600/20 flex items-center gap-2">
-                                <i class="fa-brands fa-whatsapp text-lg"></i> Enviar por WhatsApp
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Replaced with SMART Goals & Key KPIs Widget -->
-                    <div class="bg-white dark:bg-slate-900 rounded-3xl p-8 border border-slate-200/80 dark:border-slate-800 shadow-sm flex flex-col justify-between">
-                        <div>
-                            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2 flex items-center gap-3">
-                                <i class="fa-solid fa-bullseye text-emerald-600"></i> Objetivos SMART del Plan de Mercadeo
-                            </h3>
-                            <p class="text-xs text-slate-500 dark:text-slate-400 mb-6">
-                                Metas específicas, medibles y orientadas a resultados que garantizan el éxito comercial de nuestros clientes.
-                            </p>
-
-                            <div class="space-y-5">
-                                <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/60">
-                                    <div class="flex justify-between items-center mb-1">
-                                        <span class="text-xs font-bold text-slate-900 dark:text-white">1. Visibilidad & Tráfico Web</span>
-                                        <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400">+35% en 6 meses</span>
-                                    </div>
-                                    <p class="text-xs text-slate-600 dark:text-slate-300">Incremento mediante SEO técnico y marketing de contenidos orientados a conversión.</p>
-                                </div>
-
-                                <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/60">
-                                    <div class="flex justify-between items-center mb-1">
-                                        <span class="text-xs font-bold text-slate-900 dark:text-white">2. Captación de Leads Calificados</span>
-                                        <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400">20 reuniones/mes</span>
-                                    </div>
-                                    <p class="text-xs text-slate-600 dark:text-slate-300">Generación de reuniones de ventas mediante campañas PPC en Meta y Google Ads.</p>
-                                </div>
-
-                                <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/60">
-                                    <div class="flex justify-between items-center mb-1">
-                                        <span class="text-xs font-bold text-slate-900 dark:text-white">3. Fidelización & Retención</span>
-                                        <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400">80% anual</span>
-                                    </div>
-                                    <p class="text-xs text-slate-600 dark:text-slate-300">Tasa de retención de clientes mediante igualas mensuales (retainer) y soporte continuo.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="mt-6 p-4 rounded-2xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/60 text-center">
-                            <span class="text-xs font-semibold text-emerald-700 dark:text-emerald-300">
-                                <i class="fa-solid fa-circle-check mr-1"></i> Metodología probada para garantizar ROI e impacto financiero.
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- About & Team Organigram Section -->
-        <section id="nosotros" class="py-24 bg-slate-50/50 dark:bg-slate-900/30 border-b border-slate-100 dark:border-slate-900">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center max-w-2xl mx-auto mb-16">
-                    <span class="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 mb-2 block">Estructura Organizacional</span>
-                    <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 dark:text-white mb-4">Nuestro Equipo Directivo y Operativo</h2>
-                    <p class="text-slate-600 dark:text-slate-300 text-sm">Profesionales comprometidos con la excelencia, la creatividad y el éxito digital de nuestros clientes.</p>
-                </div>
-
-                <!-- Organigram Grid -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <!-- Member 1 -->
-                    <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-200/80 dark:border-slate-800 text-center shadow-sm">
-                        <div class="w-16 h-16 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-xl font-bold mx-auto mb-4">RC</div>
-                        <h3 class="font-bold text-slate-900 dark:text-white">Rebeca Michelle Calderón</h3>
-                        <p class="text-xs font-semibold text-emerald-600 dark:text-emerald-400 mt-1">Director General / CEO</p>
-                    </div>
-                    <!-- Member 2 -->
-                    <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-200/80 dark:border-slate-800 text-center shadow-sm">
-                        <div class="w-16 h-16 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-xl font-bold mx-auto mb-4">IF</div>
-                        <h3 class="font-bold text-slate-900 dark:text-white">Iliana Alicia Fuentes</h3>
-                        <p class="text-xs font-semibold text-emerald-600 dark:text-emerald-400 mt-1">Director de Marketing (CMO)</p>
-                    </div>
-                    <!-- Member 3 -->
-                    <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-200/80 dark:border-slate-800 text-center shadow-sm">
-                        <div class="w-16 h-16 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-xl font-bold mx-auto mb-4">MP</div>
-                        <h3 class="font-bold text-slate-900 dark:text-white">Manuel Pérez</h3>
-                        <p class="text-xs font-semibold text-emerald-600 dark:text-emerald-400 mt-1">Líder de Cuentas / Estrategia</p>
-                    </div>
-                    <!-- Member 4 -->
-                    <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-200/80 dark:border-slate-800 text-center shadow-sm">
-                        <div class="w-16 h-16 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-xl font-bold mx-auto mb-4">ES</div>
-                        <h3 class="font-bold text-slate-900 dark:text-white">Eliseo Sánchez</h3>
-                        <p class="text-xs font-semibold text-emerald-600 dark:text-emerald-400 mt-1">Ejecutivo de Ventas B2B</p>
-                    </div>
-                    <!-- Member 5 -->
-                    <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-200/80 dark:border-slate-800 text-center shadow-sm">
-                        <div class="w-16 h-16 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-xl font-bold mx-auto mb-4">JE</div>
-                        <h3 class="font-bold text-slate-900 dark:text-white">Johana Escobar</h3>
-                        <p class="text-xs font-semibold text-emerald-600 dark:text-emerald-400 mt-1">Administración y Finanzas</p>
-                    </div>
-                    <!-- Member 6 -->
-                    <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-200/80 dark:border-slate-800 text-center shadow-sm">
-                        <div class="w-16 h-16 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-xl font-bold mx-auto mb-4">JD</div>
-                        <h3 class="font-bold text-slate-900 dark:text-white">Jorge Del Cid López</h3>
-                        <p class="text-xs font-semibold text-emerald-600 dark:text-emerald-400 mt-1">Especialista SEO</p>
-                    </div>
-                    <!-- Member 7 -->
-                    <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-200/80 dark:border-slate-800 text-center shadow-sm">
-                        <div class="w-16 h-16 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-xl font-bold mx-auto mb-4">EY</div>
-                        <h3 class="font-bold text-slate-900 dark:text-white">Eduardo Yáñez</h3>
-                        <p class="text-xs font-semibold text-emerald-600 dark:text-emerald-400 mt-1">Especialista Media Buyer (Ads)</p>
-                    </div>
-                    <!-- Member 8 -->
-                    <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-200/80 dark:border-slate-800 text-center shadow-sm">
-                        <div class="w-16 h-16 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-xl font-bold mx-auto mb-4">JR</div>
-                        <h3 class="font-bold text-slate-900 dark:text-white">Jonathan Ramírez</h3>
-                        <p class="text-xs font-semibold text-emerald-600 dark:text-emerald-400 mt-1">Diseñador Gráfico / Video</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Financial Section & Chart.js -->
-        <section id="finanzas" class="py-24 border-b border-slate-100 dark:border-slate-900">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                    <div>
-                        <span class="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 mb-2 block">Solidez Financiera</span>
-                        <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 dark:text-white mb-6">Balance General Proyectado ($54,000 USD)</h2>
-                        <p class="text-slate-600 dark:text-slate-300 text-sm mb-6 leading-relaxed">
-                            Nuestra estructura financiera está diseñada para garantizar estabilidad operativa, inversión en tecnología de punta y un crecimiento sostenido respaldado por un capital social sólido.
+        <!-- Filosofía -->
+        <section id="filosofia" class="w-full bg-[#ffffff] section-gap px-4 sm:px-6">
+            <div class="max-w-[1000px] mx-auto border-t border-[#e6e6e8] pt-[60px] lg:pt-[90px]">
+                <div class="flex flex-responsive-editorial items-center gap-[60px] lg:gap-[90px] mb-[60px] lg:mb-[90px]">
+                    <div class="flex-1 w-full">
+                        <span class="text-product-kicker text-[#1d1d1f] block mb-4">Misión</span>
+                        <h2 class="text-feature-heading text-[#1d1d1f] mb-6">Accesibilidad y diseño moderno para todos.</h2>
+                        <p class="text-body text-[#1d1d1f] mb-4">
+                            Nuestra razón de ser es brindar servicios publicitarios modernos y accesibles para que cualquier comerciante o pyme local logre presencia digital efectiva, atraiga clientes reales e incremente sus ventas sin grandes presupuestos.
                         </p>
-                        <ul class="space-y-4 text-sm text-slate-600 dark:text-slate-300">
-                            <li class="flex items-center gap-3">
-                                <i class="fa-solid fa-circle-check text-emerald-600"></i> Total Activos: $37,000 Corrientes + $17,000 No Corrientes
-                            </li>
-                            <li class="flex items-center gap-3">
-                                <i class="fa-solid fa-circle-check text-emerald-600"></i> Total Pasivos: $16,000 (Proveedores, Impuestos y Préstamo)
-                            </li>
-                            <li class="flex items-center gap-3">
-                                <i class="fa-solid fa-circle-check text-emerald-600"></i> Patrimonio Neto: $38,000 (Capital Social + Utilidades)
-                            </li>
-                        </ul>
                     </div>
-                    <div class="bg-white dark:bg-slate-900 rounded-3xl p-8 border border-slate-200/80 dark:border-slate-800 shadow-sm flex items-center justify-center">
-                        <div class="w-full max-w-sm h-80">
-                            <canvas id="balanceChart"></canvas>
-                        </div>
+                    <div class="flex-1 w-full bg-[#f5f5f7] radius-cards aspect-square sm:aspect-auto sm:min-h-[400px] flex flex-col justify-center items-center p-8">
+                        <svg class="w-16 h-16 sm:w-20 sm:h-20 text-[#1d1d1f] mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        <span class="text-[19px] font-semibold text-[#1d1d1f] text-center">Impacto Real</span>
+                    </div>
+                </div>
+
+                <div class="flex flex-responsive-editorial-reverse flex-row-reverse items-center gap-[60px] lg:gap-[90px]">
+                    <div class="flex-1 w-full">
+                        <span class="text-product-kicker text-[#1d1d1f] block mb-4">Visión 2028</span>
+                        <h2 class="text-feature-heading text-[#1d1d1f] mb-6">Hacia el liderazgo regional en oriente.</h2>
+                        <p class="text-body text-[#1d1d1f] mb-4">
+                            Posicionarnos como la agencia líder de transformación digital en la región para el año 2028, siendo reconocidos por generar retornos económicos reales y fomentar el desarrollo empresarial local.
+                        </p>
+                    </div>
+                    <div class="flex-1 w-full bg-[#f5f5f7] radius-cards aspect-square sm:aspect-auto sm:min-h-[400px] flex flex-col justify-center items-center p-8">
+                        <svg class="w-16 h-16 sm:w-20 sm:h-20 text-[#1d1d1f] mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <span class="text-[19px] font-semibold text-[#1d1d1f] text-center">Referente en Innovación</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Contact Section -->
-        <section id="contacto" class="py-24 bg-slate-50/50 dark:bg-slate-900/30">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="max-w-2xl mx-auto text-center mb-16">
-                    <span class="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 mb-2 block">Ponte en Contacto</span>
-                    <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 dark:text-white mb-4">¿Listo para escalar tu negocio?</h2>
-                    <p class="text-slate-600 dark:text-slate-300 text-sm">Escríbenos hoy y recibe una auditoría diagnóstica inicial sin costo para tu empresa.</p>
+        <!-- Servicios / Highlights -->
+        <section id="servicios" class="w-full bg-[#f5f5f7] section-gap px-4 sm:px-6">
+            <div class="max-w-[1200px] mx-auto">
+                <div class="flex justify-between items-end mb-12">
+                    <h2 class="text-feature-heading text-[#1d1d1f]">Soluciones integrales<br>de 360 grados.</h2>
+                </div>
+                
+                <div class="auto-grid-small">
+                    <!-- Service Card -->
+                    <div onclick="openInfoModal('Identidad Corporativa', 'Creación de marcas memorables, logotipos profesionales y manuales de estilo empresarial listos para posicionar tu negocio en el municipio.', '$750 único')" class="flat-card radius-cards p-7 flex flex-col items-start h-full cursor-pointer hover-scale-card hover:bg-[#fafafc]">
+                        <div class="w-10 h-10 mb-5 text-[#1d1d1f]">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path></svg>
+                        </div>
+                        <h3 class="text-[19px] font-semibold text-[#1d1d1f] mb-2 leading-[1.21]">Identidad Corporativa</h3>
+                        <p class="text-body-small text-[#707070]">Creación de marcas memorables, logotipos y manuales de estilo empresarial.</p>
+                        <span class="text-[12px] text-[#0066cc] mt-4 font-medium">Ver detalles ›</span>
+                    </div>
+
+                    <!-- Service Card -->
+                    <div onclick="openInfoModal('Publicidad Pagada', 'Anuncios de alta conversión segmentados en Meta Ads y Google Ads para conectar con compradores locales directos en San Miguel.', '$500/mes')" class="flat-card radius-cards p-7 flex flex-col items-start h-full cursor-pointer hover-scale-card hover:bg-[#fafafc]">
+                        <div class="w-10 h-10 mb-5 text-[#1d1d1f]">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path></svg>
+                        </div>
+                        <h3 class="text-[19px] font-semibold text-[#1d1d1f] mb-2 leading-[1.21]">Publicidad Pagada</h3>
+                        <p class="text-body-small text-[#707070]">Anuncios de alta conversión en Meta Ads y Google Ads para clientes directos.</p>
+                        <span class="text-[12px] text-[#0066cc] mt-4 font-medium">Ver detalles ›</span>
+                    </div>
+
+                    <!-- Service Card -->
+                    <div onclick="openInfoModal('Gestión de Redes', 'Diseño de contenidos visuales atractivos, redacción comercial orientada a ventas y atención oportuna de prospectos.', '$400/mes')" class="flat-card radius-cards p-7 flex flex-col items-start h-full cursor-pointer hover-scale-card hover:bg-[#fafafc]">
+                        <div class="w-10 h-10 mb-5 text-[#1d1d1f]">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"></path></svg>
+                        </div>
+                        <h3 class="text-[19px] font-semibold text-[#1d1d1f] mb-2 leading-[1.21]">Gestión de Redes</h3>
+                        <p class="text-body-small text-[#707070]">Diseño de contenidos visuales y redacción comercial estratégica.</p>
+                        <span class="text-[12px] text-[#0066cc] mt-4 font-medium">Ver detalles ›</span>
+                    </div>
+
+                    <!-- Service Card -->
+                    <div onclick="openInfoModal('Desarrollo Web', 'Construcción de sitios interactivos y catálogos virtuales totalmente optimizados para celulares con pasarelas de pago.', '$1,500 único')" class="flat-card radius-cards p-7 flex flex-col items-start h-full cursor-pointer hover-scale-card hover:bg-[#fafafc]">
+                        <div class="w-10 h-10 mb-5 text-[#1d1d1f]">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path></svg>
+                        </div>
+                        <h3 class="text-[19px] font-semibold text-[#1d1d1f] mb-2 leading-[1.21]">Desarrollo Web</h3>
+                        <p class="text-body-small text-[#707070]">Sitios interactivos y catálogos virtuales optimizados para celulares.</p>
+                        <span class="text-[12px] text-[#0066cc] mt-4 font-medium">Ver detalles ›</span>
+                    </div>
+
+                    <!-- Service Card -->
+                    <div onclick="openInfoModal('Capacitación', 'Cursos prácticos para enseñar a negocios locales a cerrar ventas de forma efectiva por canales digitales como WhatsApp.', '$250/sesión')" class="flat-card radius-cards p-7 flex flex-col items-start h-full cursor-pointer hover-scale-card hover:bg-[#fafafc]">
+                        <div class="w-10 h-10 mb-5 text-[#1d1d1f]">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                        </div>
+                        <h3 class="text-[19px] font-semibold text-[#1d1d1f] mb-2 leading-[1.21]">Capacitación</h3>
+                        <p class="text-body-small text-[#707070]">Cursos prácticos para enseñar a negocios locales a cerrar ventas.</p>
+                        <span class="text-[12px] text-[#0066cc] mt-4 font-medium">Ver detalles ›</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Metodología SMART -->
+        <section id="metodologia" class="w-full bg-[#ffffff] section-gap px-4 sm:px-6">
+            <div class="max-w-[1000px] mx-auto text-center mb-[60px] lg:mb-[90px]">
+                <h2 class="text-feature-heading text-[#1d1d1f] mb-4">Metodología SMART.</h2>
+                <p class="text-feature-statement text-[#707070] max-w-[700px] mx-auto">
+                    Metas específicas, medibles, alcanzables y orientadas a resultados.
+                </p>
+            </div>
+
+            <div class="max-w-[1000px] mx-auto flex flex-col gap-10 lg:gap-[60px]">
+                <div class="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-8 border-t border-[#d6d6d6] pt-8 lg:pt-12">
+                    <div class="md:w-1/3"><span class="text-hero-display text-[#e6e6e8] leading-none">01</span></div>
+                    <div class="md:w-2/3">
+                        <h3 class="text-[24px] font-semibold text-[#1d1d1f] mb-2 md:mb-3">Contenido Impactante</h3>
+                        <p class="text-body text-[#707070]">Diseñar piezas gráficas y videos promocionales orientados a llamar la atención del público meta en redes sociales.</p>
+                    </div>
                 </div>
 
-                <div class="max-w-xl mx-auto bg-white dark:bg-slate-900 rounded-3xl p-8 border border-slate-200/80 dark:border-slate-800 shadow-sm">
-                    <form onsubmit="handleContactSubmit(event)" class="space-y-4">
-                        <div>
-                            <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">Nombre Completo</label>
-                            <input type="text" required class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500" placeholder="Ej. Carlos Mendoza">
+                <div class="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-8 border-t border-[#d6d6d6] pt-8 lg:pt-12">
+                    <div class="md:w-1/3"><span class="text-hero-display text-[#e6e6e8] leading-none">02</span></div>
+                    <div class="md:w-2/3">
+                        <h3 class="text-[24px] font-semibold text-[#1d1d1f] mb-2 md:mb-3">Pauta Publicitaria</h3>
+                        <p class="text-body text-[#707070]">Segmentar y optimizar campañas en Meta y Google dirigidas exclusivamente a clientes con alta intención de compra.</p>
+                    </div>
+                </div>
+
+                <div class="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-8 border-t border-[#d6d6d6] pt-8 lg:pt-12">
+                    <div class="md:w-1/3"><span class="text-hero-display text-[#e6e6e8] leading-none">03</span></div>
+                    <div class="md:w-2/3">
+                        <h3 class="text-[24px] font-semibold text-[#1d1d1f] mb-2 md:mb-3">Acompañamiento Continuo</h3>
+                        <p class="text-body text-[#707070]">Capacitar a los empresarios locales para responder cotizaciones y cerrar prospectos de forma rápida por canales digitales.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Equipo -->
+        <section id="equipo" class="w-full bg-[#f5f5f7] border-t border-[#d6d6d6] section-gap px-4 sm:px-6">
+            <div class="max-w-[1200px] mx-auto">
+                <div class="mb-12">
+                    <h2 class="text-feature-heading text-[#1d1d1f]">Estructura Organizacional.</h2>
+                    <p class="text-body text-[#707070] mt-4">Un equipo multidisciplinario enfocado en la rentabilidad de las PYMES.</p>
+                </div>
+
+                <div class="auto-grid-small">
+                    <!-- Team Card -->
+                    <div class="flat-card radius-cards p-6 flex flex-col items-center text-center h-full hover-scale-card">
+                        <div class="w-16 h-16 bg-[#e6e6e8] rounded-full flex items-center justify-center text-[#707070] mb-4">
+                            <span class="text-lg font-semibold text-[#1d1d1f]">RC</span>
                         </div>
-                        <div>
-                            <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">Correo Electrónico</label>
-                            <input type="email" required class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500" placeholder="carlos@empresa.com">
+                        <h3 class="text-[17px] font-semibold text-[#1d1d1f] leading-tight mb-1">Rebeca Calderón</h3>
+                        <p class="text-[12px] text-[#707070] uppercase tracking-wider">Directora General</p>
+                    </div>
+                    <div class="flat-card radius-cards p-6 flex flex-col items-center text-center h-full hover-scale-card">
+                        <div class="w-16 h-16 bg-[#e6e6e8] rounded-full flex items-center justify-center text-[#707070] mb-4">
+                            <span class="text-lg font-semibold text-[#1d1d1f]">IF</span>
                         </div>
-                        <div>
-                            <label class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">Mensaje o Requerimiento</label>
-                            <textarea rows="4" required class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500" placeholder="Cuéntanos sobre tu negocio..."></textarea>
+                        <h3 class="text-[17px] font-semibold text-[#1d1d1f] leading-tight mb-1">Iliana Fuentes</h3>
+                        <p class="text-[12px] text-[#707070] uppercase tracking-wider">Dir. Marketing</p>
+                    </div>
+                    <div class="flat-card radius-cards p-6 flex flex-col items-center text-center h-full hover-scale-card">
+                        <div class="w-16 h-16 bg-[#e6e6e8] rounded-full flex items-center justify-center text-[#707070] mb-4">
+                            <span class="text-lg font-semibold text-[#1d1d1f]">MP</span>
                         </div>
-                        <button type="submit" class="w-full py-3.5 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm transition-all shadow-md shadow-emerald-600/20">
-                            Enviar Mensaje
-                        </button>
-                    </form>
+                        <h3 class="text-[17px] font-semibold text-[#1d1d1f] leading-tight mb-1">Manuel Pérez</h3>
+                        <p class="text-[12px] text-[#707070] uppercase tracking-wider">Líder de Cuentas</p>
+                    </div>
+                    <div class="flat-card radius-cards p-6 flex flex-col items-center text-center h-full hover-scale-card">
+                        <div class="w-16 h-16 bg-[#e6e6e8] rounded-full flex items-center justify-center text-[#707070] mb-4">
+                            <span class="text-lg font-semibold text-[#1d1d1f]">JE</span>
+                        </div>
+                        <h3 class="text-[17px] font-semibold text-[#1d1d1f] leading-tight mb-1">Johana Escobar</h3>
+                        <p class="text-[12px] text-[#707070] uppercase tracking-wider">Finanzas</p>
+                    </div>
+                    <div class="flat-card radius-cards p-6 flex flex-col items-center text-center h-full hover-scale-card">
+                        <div class="w-16 h-16 bg-[#e6e6e8] rounded-full flex items-center justify-center text-[#707070] mb-4">
+                            <span class="text-lg font-semibold text-[#1d1d1f]">ES</span>
+                        </div>
+                        <h3 class="text-[17px] font-semibold text-[#1d1d1f] leading-tight mb-1">Eliseo Sánchez</h3>
+                        <p class="text-[12px] text-[#707070] uppercase tracking-wider">Ventas B2B</p>
+                    </div>
+                    <div class="flat-card radius-cards p-6 flex flex-col items-center text-center h-full hover-scale-card">
+                        <div class="w-16 h-16 bg-[#e6e6e8] rounded-full flex items-center justify-center text-[#707070] mb-4">
+                            <span class="text-lg font-semibold text-[#1d1d1f]">JC</span>
+                        </div>
+                        <h3 class="text-[17px] font-semibold text-[#1d1d1f] leading-tight mb-1">Jorge Del Cid</h3>
+                        <p class="text-[12px] text-[#707070] uppercase tracking-wider">Especialista SEO</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Planes / Tarifario interactivo -->
+        <section id="planes" class="w-full bg-[#ffffff] section-gap px-4 sm:px-6">
+            <div class="max-w-[1200px] mx-auto">
+                <div class="text-center mb-12 lg:mb-16">
+                    <h2 class="text-feature-heading text-[#1d1d1f] mb-4">Tarifario 2026.</h2>
+                    <p class="text-body text-[#707070]">Selecciona tu plan para añadirlo al carrito de contratación.</p>
+                </div>
+                
+                <div class="auto-grid">
+                    <!-- Plan 1 -->
+                    <div class="flat-card radius-cards bg-[#f5f5f7] p-6 lg:p-8 flex flex-col h-full relative hover-scale-card">
+                        <span class="absolute top-0 right-0 text-[12px] font-semibold px-6 py-6 text-[#b64400]">Más Popular</span>
+                        <h3 class="text-[21px] font-semibold text-[#1d1d1f] mb-1">Paquete PYME</h3>
+                        <div class="flex items-baseline mb-6">
+                            <span class="text-[40px] font-semibold text-[#1d1d1f] tracking-tight">$700</span>
+                            <span class="text-body-small text-[#707070] ml-1">/mes</span>
+                        </div>
+                        <ul class="text-body-small text-[#707070] space-y-3 mb-8 flex-grow">
+                            <li class="flex items-start"><span class="text-[#1d1d1f] mr-2">›</span>Manejo de 2 redes sociales</li>
+                            <li class="flex items-start"><span class="text-[#1d1d1f] mr-2">›</span>12 publicaciones gráficas</li>
+                            <li class="flex items-start"><span class="text-[#1d1d1f] mr-2">›</span>Campaña básica Meta Ads</li>
+                            <li class="flex items-start"><span class="text-[#1d1d1f] mr-2">›</span>Reporte mensual de métricas</li>
+                        </ul>
+                        <button onclick="addToCart('Paquete PYME', 700, 'mes', this)" class="pricing-pill radius-pills text-compact-control w-full py-3 hover:bg-[#0066cc] font-medium">Contratar plan</button>
+                    </div>
+
+                    <!-- Plan 2 -->
+                    <div class="flat-card radius-cards bg-[#f5f5f7] p-6 lg:p-8 flex flex-col h-full hover-scale-card">
+                        <h3 class="text-[21px] font-semibold text-[#1d1d1f] mb-1">Marketing PRO</h3>
+                        <div class="flex items-baseline mb-6">
+                            <span class="text-[40px] font-semibold text-[#1d1d1f] tracking-tight">$1,200</span>
+                            <span class="text-body-small text-[#707070] ml-1">/mes</span>
+                        </div>
+                        <ul class="text-body-small text-[#707070] space-y-3 mb-8 flex-grow">
+                            <li class="flex items-start"><span class="text-[#1d1d1f] mr-2">›</span>Gestión completa de redes</li>
+                            <li class="flex items-start"><span class="text-[#1d1d1f] mr-2">›</span>Embudos Meta & Google Ads</li>
+                            <li class="flex items-start"><span class="text-[#1d1d1f] mr-2">›</span>Producción de Video Reels</li>
+                            <li class="flex items-start"><span class="text-[#1d1d1f] mr-2">›</span>SEO Local + Atención CRM</li>
+                        </ul>
+                        <button onclick="addToCart('Marketing PRO', 1200, 'mes', this)" class="pricing-pill radius-pills text-compact-control w-full py-3 hover:bg-[#0066cc] font-medium">Contratar plan</button>
+                    </div>
+
+                    <!-- Plan 3 -->
+                    <div class="flat-card radius-cards bg-[#f5f5f7] p-6 lg:p-8 flex flex-col h-full hover-scale-card">
+                        <h3 class="text-[21px] font-semibold text-[#1d1d1f] mb-1">Tienda Online</h3>
+                        <div class="flex items-baseline mb-6">
+                            <span class="text-[40px] font-semibold text-[#1d1d1f] tracking-tight">$1,500</span>
+                            <span class="text-body-small text-[#707070] ml-1">/único</span>
+                        </div>
+                        <ul class="text-body-small text-[#707070] space-y-3 mb-8 flex-grow">
+                            <li class="flex items-start"><span class="text-[#1d1d1f] mr-2">›</span>Sitio E-commerce completo</li>
+                            <li class="flex items-start"><span class="text-[#1d1d1f] mr-2">›</span>Pasarela de cobro integrada</li>
+                            <li class="flex items-start"><span class="text-[#1d1d1f] mr-2">›</span>Catálogo de hasta 50 prod.</li>
+                            <li class="flex items-start"><span class="text-[#1d1d1f] mr-2">›</span>Capacitación de admin.</li>
+                        </ul>
+                        <button onclick="addToCart('Tienda Online', 1500, 'único', this)" class="pricing-pill radius-pills text-compact-control w-full py-3 hover:bg-[#0066cc] font-medium">Solicitar desarrollo</button>
+                    </div>
+
+                    <!-- Plan 4 -->
+                    <div class="flat-card radius-cards bg-[#f5f5f7] p-6 lg:p-8 flex flex-col h-full hover-scale-card">
+                        <h3 class="text-[21px] font-semibold text-[#1d1d1f] mb-1">Branding & Foto</h3>
+                        <div class="flex items-baseline mb-6">
+                            <span class="text-[40px] font-semibold text-[#1d1d1f] tracking-tight">$750</span>
+                            <span class="text-body-small text-[#707070] ml-1">/único</span>
+                        </div>
+                        <ul class="text-body-small text-[#707070] space-y-3 mb-8 flex-grow">
+                            <li class="flex items-start"><span class="text-[#1d1d1f] mr-2">›</span>Diseño de logotipo completo</li>
+                            <li class="flex items-start"><span class="text-[#1d1d1f] mr-2">›</span>Manual de identidad visual</li>
+                            <li class="flex items-start"><span class="text-[#1d1d1f] mr-2">›</span>Sesión fotográfica de prod.</li>
+                            <li class="flex items-start"><span class="text-[#1d1d1f] mr-2">›</span>Plantillas editables Canva</li>
+                        </ul>
+                        <button onclick="addToCart('Branding & Foto', 750, 'único', this)" class="pricing-pill radius-pills text-compact-control w-full py-3 hover:bg-[#0066cc] font-medium">Solicitar cotización</button>
+                    </div>
                 </div>
             </div>
         </section>
@@ -497,171 +536,224 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-white dark:bg-slate-950 border-t border-slate-200/60 dark:border-slate-800/60 py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
-            <div class="flex items-center gap-3">
-                <img src="https://i.im.ge/QQU5PE9/778633d3-bac0-432c-ae7a-07d263ff2446.jpg" alt="Horizonte Digital Logo" class="h-8 w-auto object-contain rounded-lg border border-slate-200 dark:border-slate-700 bg-white p-0.5">
-                <span class="font-bold text-slate-900 dark:text-white">Horizonte Digital</span>
+    <footer class="w-full bg-[#f5f5f7] border-t border-[#d6d6d6] py-[60px] px-6">
+        <div class="max-w-[1000px] mx-auto text-center md:text-left flex flex-col md:flex-row justify-between items-center gap-4">
+            <div>
+                <h3 class="text-product-kicker text-[#1d1d1f] mb-2">Horizonte Digital</h3>
+                <p class="text-body-small text-[#707070]">San Miguel, El Salvador • contacto@horizontedigital.sv</p>
+                <a href="https://horizontedigitalsv.netlify.app" target="_blank" class="text-[12px] text-[#0066cc] hover:underline">horizontedigitalsv.netlify.app</a>
             </div>
-            <p class="text-xs text-slate-500 dark:text-slate-400 text-center">
-                © 2026 Horizonte Digital. Todos los derechos reservados. Proyecto: Soy Emprendedor en mi Municipio.
-            </p>
-            <div class="flex items-center gap-4 text-slate-400">
-                <a href="javascript:void(0)" class="hover:text-emerald-600 transition-colors"><i class="fa-brands fa-linkedin text-lg"></i></a>
-                <a href="javascript:void(0)" class="hover:text-emerald-600 transition-colors"><i class="fa-brands fa-instagram text-lg"></i></a>
-                <a href="javascript:void(0)" class="hover:text-emerald-600 transition-colors"><i class="fa-brands fa-facebook text-lg"></i></a>
-            </div>
+            <span class="text-[12px] text-[#707070]">Copyright © 2026 Horizonte Digital. Todos los derechos reservados.</span>
         </div>
     </footer>
 
-    <!-- Service Detail Modal -->
-    <div id="service-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm hidden">
-        <div class="bg-white dark:bg-slate-900 rounded-3xl p-8 max-w-lg w-full border border-slate-200 dark:border-slate-800 shadow-2xl relative">
-            <button type="button" onclick="closeServiceModal()" class="absolute top-6 right-6 text-slate-400 hover:text-slate-600 dark:hover:text-white">
-                <i class="fa-solid fa-xmark text-xl"></i>
-            </button>
-            <h3 id="modal-title" class="text-2xl font-bold text-slate-900 dark:text-white mb-2">Título del Servicio</h3>
-            <p id="modal-price" class="text-emerald-600 dark:text-emerald-400 font-bold text-lg mb-4">$0</p>
-            <p id="modal-desc" class="text-sm text-slate-600 dark:text-slate-300 mb-8 leading-relaxed">Descripción detallada del servicio seleccionado.</p>
-            <button type="button" onclick="closeServiceModal(); scrollToSection('cotizador');" class="w-full py-3 rounded-full bg-slate-900 text-white dark:bg-white dark:text-slate-900 font-semibold text-sm hover:bg-emerald-600 dark:hover:bg-emerald-400 transition-all">
-                Seleccionar en Cotizador
-            </button>
-        </div>
-    </div>
+    <!-- ==========================================================================
+         INTERACTIVE MODALS & CART SYSTEM (WITH ANIMATIONS)
+         ========================================================================== -->
 
-    <!-- Contact Success Modal -->
-    <div id="contact-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm hidden">
-        <div class="bg-white dark:bg-slate-900 rounded-3xl p-8 max-w-sm w-full border border-slate-200 dark:border-slate-800 shadow-2xl text-center">
-            <div class="w-16 h-16 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-600 flex items-center justify-center text-2xl mx-auto mb-4">
-                <i class="fa-solid fa-check"></i>
+    <!-- Info Detail Modal -->
+    <div id="info-modal" class="fixed inset-0 z-50 flex items-center justify-center hidden modal-backdrop px-4">
+        <!-- Add animation class dynamically via JS or place here -->
+        <div id="info-modal-content" class="bg-white radius-cards max-w-lg w-full p-8 relative border border-[#d6d6d6] shadow-none">
+            <button onclick="closeInfoModal()" class="absolute top-6 right-6 text-[#707070] hover:text-[#1d1d1f] text-xl font-bold">✕</button>
+            <h3 id="modal-title" class="text-[24px] font-semibold text-[#1d1d1f] mb-3">Título</h3>
+            <p id="modal-desc" class="text-body text-[#707070] mb-6">Descripción del servicio detallado.</p>
+            <div class="flex justify-between items-center border-t border-[#d6d6d6] pt-4">
+                <span id="modal-price" class="text-[20px] font-semibold text-[#1d1d1f]">$0</span>
+                <button id="modal-add-btn" onclick="addCurrentModalToCart(this)" class="pricing-pill radius-pills text-compact-control px-6 py-2.5">Añadir al carrito</button>
             </div>
-            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">¡Mensaje Enviado!</h3>
-            <p class="text-xs text-slate-600 dark:text-slate-400 mb-6">Nos pondremos en contacto contigo a la brevedad posible.</p>
-            <button type="button" onclick="closeContactModal()" class="w-full py-2.5 rounded-full bg-emerald-600 text-white font-semibold text-xs hover:bg-emerald-700 transition-all">Aceptar</button>
         </div>
     </div>
 
-    <!-- JavaScript Logic -->
+    <!-- Cart Drawer Modal -->
+    <div id="cart-modal" class="fixed inset-0 z-50 flex justify-end hidden modal-backdrop">
+        <div id="cart-modal-content" class="bg-white w-full max-w-md h-full flex flex-col p-6 border-l border-[#d6d6d6] shadow-none relative overflow-y-auto">
+            <div class="flex justify-between items-center border-b border-[#d6d6d6] pb-4 mb-4">
+                <h3 class="text-[21px] font-semibold text-[#1d1d1f]">Tu Carrito</h3>
+                <button onclick="toggleCartModal(false)" class="text-[#707070] hover:text-[#1d1d1f] text-xl font-bold">✕</button>
+            </div>
+            
+            <div id="cart-items" class="flex-grow space-y-4 mb-6">
+                <!-- Items injected via JS -->
+            </div>
+
+            <div class="border-t border-[#d6d6d6] pt-4">
+                <div class="flex justify-between items-center mb-6">
+                    <span class="text-[17px] font-semibold text-[#1d1d1f]">Total estimado:</span>
+                    <span id="cart-total" class="text-[24px] font-semibold text-[#0071e3]">$0</span>
+                </div>
+                <button onclick="proceedToCheckout()" class="pricing-pill radius-pills text-compact-control w-full py-3.5 text-center font-medium block">Proceder con el pago</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout Simulated Modal -->
+    <div id="checkout-modal" class="fixed inset-0 z-50 flex items-center justify-center hidden modal-backdrop px-4">
+        <div id="checkout-modal-content" class="bg-white radius-cards max-w-md w-full p-8 relative border border-[#d6d6d6] shadow-none">
+            <button onclick="closeCheckoutModal()" class="absolute top-6 right-6 text-[#707070] hover:text-[#1d1d1f] text-xl font-bold">✕</button>
+            <h3 class="text-[24px] font-semibold text-[#1d1d1f] mb-4">Pasarela de Pago Segura</h3>
+            <form onsubmit="handleCheckoutSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-body-small text-[#707070] mb-1">Nombre del Negocio</label>
+                    <input type="text" required placeholder="Ej. Panadería San Miguel" class="w-full border border-[#d6d6d6] rounded-lg p-3 text-body text-[#1d1d1f] focus:outline-none focus:border-[#86868b] shadow-none bg-[#fafafc]">
+                </div>
+                <div>
+                    <label class="block text-body-small text-[#707070] mb-1">Correo electrónico</label>
+                    <input type="email" required placeholder="tu-negocio@email.com" class="w-full border border-[#d6d6d6] rounded-lg p-3 text-body text-[#1d1d1f] focus:outline-none focus:border-[#86868b] shadow-none bg-[#fafafc]">
+                </div>
+                <button type="submit" class="pricing-pill radius-pills text-compact-control w-full py-3.5 text-center font-medium mt-4">Confirmar Orden</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="fixed inset-0 z-50 flex items-center justify-center hidden modal-backdrop px-4">
+        <div id="success-modal-content" class="bg-white radius-cards max-w-md w-full p-8 text-center border border-[#d6d6d6] shadow-none">
+            <div class="w-16 h-16 bg-[#e6e6e8] text-[#0071e3] rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold">✓</div>
+            <h3 class="text-[24px] font-semibold text-[#1d1d1f] mb-2">¡Contratación Exitosa!</h3>
+            <p class="text-body text-[#707070] mb-6">Hemos registrado tu solicitud. El equipo de Horizonte Digital se pondrá en contacto pronto.</p>
+            <button onclick="resetAndCloseAll()" class="pricing-pill radius-pills text-compact-control px-8 py-3 font-medium">Aceptar</button>
+        </div>
+    </div>
+
+    <!-- JavaScript Interactive & Animation Logic -->
     <script>
-        // Smooth scroll without jumping to top
-        function scrollToSection(id) {
-            const el = document.getElementById(id);
-            if (el) {
-                el.scrollIntoView({ behavior: 'smooth' });
-            }
+        let cart = [];
+        let currentModalService = null;
+
+        // Animations helper
+        function triggerAnimation(elementId, animationClass) {
+            const el = document.getElementById(elementId);
+            el.classList.remove(animationClass);
+            void el.offsetWidth; // Trigger reflow to restart animation
+            el.classList.add(animationClass);
         }
 
-        // Dark Mode Toggle
-        function toggleDarkMode() {
-            const html = document.documentElement;
-            html.classList.toggle('dark');
-            const icon = document.getElementById('theme-icon');
-            if (html.classList.contains('dark')) {
-                icon.className = 'fa-solid fa-sun text-sm';
-                localStorage.setItem('theme', 'dark');
-            } else {
-                icon.className = 'fa-solid fa-moon text-sm';
-                localStorage.setItem('theme', 'light');
-            }
-        }
-
-        // Initialize theme from storage
-        if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark');
-            document.getElementById('theme-icon').className = 'fa-solid fa-sun text-sm';
-        }
-
-        // Service Filter
-        function filterServices(category) {
-            const buttons = document.querySelectorAll('.service-filter-btn');
-            buttons.forEach(btn => {
-                btn.className = "service-filter-btn px-4 py-2 rounded-full text-xs font-semibold bg-white text-slate-600 dark:bg-slate-800 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition-all";
-            });
-            event.currentTarget.className = "service-filter-btn px-4 py-2 rounded-full text-xs font-semibold bg-slate-900 text-white dark:bg-white dark:text-slate-900 transition-all";
-
-            const cards = document.querySelectorAll('.service-card');
-            cards.forEach(card => {
-                if (category === 'all' || card.getAttribute('data-category') === category) {
-                    card.style.display = 'flex';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        }
-
-        // Modals
-        function openServiceModal(title, price, desc) {
+        // Info Modal
+        function openInfoModal(title, desc, price) {
+            currentModalService = { title, price };
             document.getElementById('modal-title').innerText = title;
-            document.getElementById('modal-price').innerText = price;
             document.getElementById('modal-desc').innerText = desc;
-            document.getElementById('service-modal').classList.remove('hidden');
-        }
-        function closeServiceModal() {
-            document.getElementById('service-modal').classList.add('hidden');
-        }
-        function closeContactModal() {
-            document.getElementById('contact-modal').classList.add('hidden');
-        }
-        function handleContactSubmit(e) {
-            e.preventDefault();
-            document.getElementById('contact-modal').classList.remove('hidden');
-            e.target.reset();
+            document.getElementById('modal-price').innerText = price;
+            
+            document.getElementById('info-modal').classList.remove('hidden');
+            triggerAnimation('info-modal-content', 'animate-modal-enter');
         }
 
-        // Quote Calculator
-        function calculateQuote() {
-            const checkboxes = document.querySelectorAll('#cotizador input[type="checkbox"]:checked');
-            let total = 0;
-            checkboxes.forEach(cb => {
-                total += parseFloat(cb.value);
-            });
-            document.getElementById('quote-total').innerText = '$' + total.toLocaleString();
+        function closeInfoModal() {
+            document.getElementById('info-modal').classList.add('hidden');
         }
 
-        function sendWhatsAppQuote() {
-            const checkboxes = document.querySelectorAll('#cotizador input[type="checkbox"]:checked');
-            if (checkboxes.length === 0) {
-                alert('Por favor selecciona al menos un servicio para cotizar.');
-                return;
+        function addCurrentModalToCart(btnElement) {
+            if (currentModalService) {
+                const numericPrice = parseInt(currentModalService.price.replace(/[^0-9]/g, ''));
+                const period = currentModalService.price.includes('mes') ? 'mes' : 'único';
+                addToCart(currentModalService.title, numericPrice, period, btnElement);
+                
+                // Delay closing so user sees the button animation
+                setTimeout(() => {
+                    closeInfoModal();
+                    toggleCartModal(true);
+                }, 400);
             }
-            let text = "Hola Horizonte Digital, me interesa cotizar el siguiente paquete:%0A";
-            let total = 0;
-            checkboxes.forEach(cb => {
-                text += `- ${cb.getAttribute('data-name')} ($${cb.value})%0A`;
-                total += parseFloat(cb.value);
-            });
-            text += `%0ATotal Estimado: $${total.toLocaleString()}`;
-            window.open(`https://wa.me/?text=${text}`, '_blank');
         }
 
-        // Chart.js Balance Sheet
-        window.addEventListener('DOMContentLoaded', () => {
-            const ctx = document.getElementById('balanceChart').getContext('2d');
-            new Chart(ctx, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Activo Corriente', 'Activo No Corriente', 'Pasivo Total', 'Patrimonio Neto'],
-                    datasets: [{
-                        data: [37000, 17000, 16000, 38000],
-                        backgroundColor: ['#10b981', '#34d399', '#f43f5e', '#64748b'],
-                        borderWidth: 0
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            position: 'bottom',
-                            labels: {
-                                boxWidth: 12,
-                                font: { size: 11, family: 'Inter' }
-                            }
-                        }
-                    }
-                }
-            });
-        });
+        // Cart Core Logic
+        function addToCart(name, price, period, btnElement) {
+            cart.push({ name, price, period });
+            updateCartUI();
+
+            // 1. Animate Cart Counter Pill
+            triggerAnimation('cart-counter', 'animate-pop');
+
+            // 2. Animate Button (Scale down/up & Text change)
+            if (btnElement) {
+                const originalText = btnElement.innerText;
+                // Scale down slightly
+                btnElement.style.transform = 'scale(0.95)';
+                btnElement.innerText = '¡Añadido!';
+                
+                // Scale back up to normal
+                setTimeout(() => {
+                    btnElement.style.transform = 'scale(1)';
+                }, 150);
+                
+                // Revert text after 1.5s
+                setTimeout(() => {
+                    btnElement.innerText = originalText;
+                }, 1500);
+            }
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const counter = document.getElementById('cart-counter');
+            counter.innerText = cart.length;
+
+            const itemsContainer = document.getElementById('cart-items');
+            itemsContainer.innerHTML = '';
+
+            let total = 0;
+            if (cart.length === 0) {
+                itemsContainer.innerHTML = '<p class="text-body-small text-[#707070] text-center py-8">Tu carrito está vacío.</p>';
+            } else {
+                cart.forEach((item, index) => {
+                    total += item.price;
+                    itemsContainer.innerHTML += `
+                        <div class="flex justify-between items-center border-b border-[#e6e6e8] pb-3">
+                            <div>
+                                <h4 class="text-body font-semibold text-[#1d1d1f]">${item.name}</h4>
+                                <span class="text-body-small text-[#707070]">$${item.price} / ${item.period}</span>
+                            </div>
+                            <button onclick="removeFromCart(${index})" class="text-[12px] text-[#707070] hover:text-[#1d1d1f] transition-colors">Eliminar</button>
+                        </div>
+                    `;
+                });
+            }
+
+            document.getElementById('cart-total').innerText = '$' + total.toLocaleString();
+        }
+
+        // Modals management
+        function toggleCartModal(show) {
+            const modal = document.getElementById('cart-modal');
+            if (show) {
+                modal.classList.remove('hidden');
+                triggerAnimation('cart-modal-content', 'animate-modal-enter');
+            } else {
+                modal.classList.add('hidden');
+            }
+        }
+
+        function proceedToCheckout() {
+            if (cart.length === 0) return;
+            toggleCartModal(false);
+            
+            document.getElementById('checkout-modal').classList.remove('hidden');
+            triggerAnimation('checkout-modal-content', 'animate-modal-enter');
+        }
+
+        function closeCheckoutModal() {
+            document.getElementById('checkout-modal').classList.add('hidden');
+        }
+
+        function handleCheckoutSubmit(event) {
+            event.preventDefault();
+            document.getElementById('checkout-modal').classList.add('hidden');
+            
+            document.getElementById('success-modal').classList.remove('hidden');
+            triggerAnimation('success-modal-content', 'animate-modal-enter');
+        }
+
+        function resetAndCloseAll() {
+            cart = [];
+            updateCartUI();
+            document.getElementById('success-modal').classList.add('hidden');
+        }
     </script>
 </body>
 </html>
